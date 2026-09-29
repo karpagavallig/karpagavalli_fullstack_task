@@ -1,0 +1,2466 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>AI Powered SDLC</title>
+
+<style>
+
+/* =========================
+   GENERAL
+========================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    min-height: 100vh;
+    color: #222;
+}
+
+.page {
+    display: none;
+    min-height: 100vh;
+}
+
+.page.active {
+    display: block;
+}
+
+
+/* =========================
+   LOGIN PAGE
+========================= */
+
+.login-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.login-box {
+    width: 420px;
+    background: white;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.25);
+    text-align: center;
+}
+
+.login-logo {
+    font-size: 55px;
+    margin-bottom: 10px;
+}
+
+.login-box h1 {
+    color: #5b3cc4;
+    margin-bottom: 8px;
+}
+
+.login-box p {
+    color: #777;
+    margin-bottom: 25px;
+}
+
+.input-box {
+    width: 100%;
+    padding: 14px;
+    margin: 10px 0;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    font-size: 16px;
+    outline: none;
+}
+
+.input-box:focus {
+    border-color: #667eea;
+}
+
+.main-btn {
+    width: 100%;
+    padding: 14px;
+    margin-top: 15px;
+    border: none;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    font-size: 17px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.main-btn:hover {
+    opacity: 0.9;
+    transform: scale(1.02);
+}
+
+.signup-text {
+    margin-top: 20px;
+    color: #555;
+}
+
+.link-btn {
+    border: none;
+    background: none;
+    color: #667eea;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.link-btn:hover {
+    text-decoration: underline;
+}
+
+
+/* =========================
+   NAVBAR
+========================= */
+
+.navbar {
+    background: rgba(255,255,255,0.97);
+    padding: 18px 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+}
+
+.logo {
+    font-size: 25px;
+    font-weight: bold;
+    color: #5b3cc4;
+}
+
+.nav-buttons {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.nav-btn {
+    border: none;
+    background: transparent;
+    padding: 10px 15px;
+    color: #555;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 8px;
+}
+
+.nav-btn:hover {
+    background: #eeeaff;
+    color: #5b3cc4;
+}
+
+.logout-btn {
+    background: #ef4444;
+    color: white;
+}
+
+.logout-btn:hover {
+    background: #dc2626;
+    color: white;
+}
+
+
+/* =========================
+   HOME PAGE
+========================= */
+
+.home-container {
+    padding: 60px 8%;
+}
+
+.hero {
+    background: rgba(255,255,255,0.97);
+    border-radius: 25px;
+    padding: 60px;
+    text-align: center;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+}
+
+.hero h1 {
+    font-size: 45px;
+    color: #5b3cc4;
+    margin-bottom: 15px;
+}
+
+.hero h2 {
+    font-size: 25px;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.hero p {
+    font-size: 18px;
+    color: #666;
+    line-height: 1.7;
+    margin-bottom: 30px;
+}
+
+.hero-btn {
+    padding: 14px 30px;
+    border: none;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    font-size: 17px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.hero-btn:hover {
+    transform: scale(1.05);
+}
+
+
+/* =========================
+   CARDS
+========================= */
+
+.card-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+    margin-top: 40px;
+}
+
+.card {
+    background: white;
+    padding: 30px;
+    border-radius: 18px;
+    text-align: center;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+
+.card-icon {
+    font-size: 45px;
+    margin-bottom: 15px;
+}
+
+.card h3 {
+    color: #5b3cc4;
+    margin-bottom: 10px;
+}
+
+.card p {
+    color: #666;
+    line-height: 1.5;
+}
+
+
+/* =========================
+   REGISTER PAGE
+========================= */
+
+.register-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.register-box {
+    width: 450px;
+    background: white;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.25);
+}
+
+.register-box h1 {
+    text-align: center;
+    color: #5b3cc4;
+    margin-bottom: 10px;
+}
+
+.register-box .subtitle {
+    text-align: center;
+    color: #777;
+    margin-bottom: 25px;
+}
+
+.register-btn {
+    width: 100%;
+    padding: 14px;
+    margin-top: 15px;
+    border: none;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    font-size: 17px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.register-btn:hover {
+    opacity: 0.9;
+}
+
+
+/* =========================
+   SDLC STAGES
+========================= */
+
+.section-container {
+    padding: 50px 8%;
+}
+
+.section-title {
+    background: white;
+    padding: 35px;
+    border-radius: 20px;
+    text-align: center;
+    margin-bottom: 30px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+
+.section-title h1 {
+    color: #5b3cc4;
+    margin-bottom: 10px;
+}
+
+.stage-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+.stage {
+    padding: 30px;
+    border-radius: 18px;
+    color: white;
+    min-height: 200px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+
+.stage h2 {
+    margin-bottom: 15px;
+}
+
+.stage p {
+    line-height: 1.6;
+}
+
+.requirement {
+    background: linear-gradient(135deg, #ff6b6b, #ee5253);
+}
+
+.design {
+    background: linear-gradient(135deg, #ff9f43, #feca57);
+}
+
+.development {
+    background: linear-gradient(135deg, #10ac84, #1dd1a1);
+}
+
+.testing {
+    background: linear-gradient(135deg, #54a0ff, #2e86de);
+}
+
+.deployment {
+    background: linear-gradient(135deg, #5f27cd, #341f97);
+}
+
+.maintenance {
+    background: linear-gradient(135deg, #00d2d3, #01a3a4);
+}
+
+
+/* =========================
+   AI TOOLS
+========================= */
+
+.ai-container {
+    padding: 50px 8%;
+}
+
+.ai-box {
+    background: white;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.ai-box h1 {
+    text-align: center;
+    color: #5b3cc4;
+    margin-bottom: 15px;
+}
+
+.ai-box > p {
+    text-align: center;
+    color: #666;
+    margin-bottom: 25px;
+}
+
+textarea {
+    width: 100%;
+    min-height: 150px;
+    padding: 15px;
+    border: 2px solid #ddd;
+    border-radius: 12px;
+    resize: vertical;
+    font-size: 16px;
+}
+
+textarea:focus {
+    border-color: #667eea;
+    outline: none;
+}
+
+.analyze-btn {
+    margin-top: 15px;
+    padding: 14px 30px;
+    border: none;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    font-size: 17px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.output {
+    margin-top: 25px;
+    padding: 30px;
+    background: #f4f1ff;
+    border-left: 5px solid #667eea;
+    border-radius: 10px;
+    display: none;
+}
+
+.output h2 {
+    color: #5b3cc4;
+    margin-bottom: 20px;
+}
+
+.output-section {
+    background: white;
+    padding: 20px;
+    margin: 15px 0;
+    border-radius: 12px;
+    border-left: 5px solid #667eea;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+}
+
+.output-section h3 {
+    color: #5b3cc4;
+    margin-bottom: 12px;
+}
+
+.output-section ul {
+    margin-left: 25px;
+}
+
+.output-section li {
+    margin-bottom: 8px;
+    line-height: 1.5;
+}
+
+.project-title {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+}
+
+.project-title h3 {
+    margin-bottom: 8px;
+}
+
+.project-title p {
+    line-height: 1.6;
+}
+
+
+/* =========================
+   CONTACT
+========================= */
+
+.contact-container {
+    padding: 50px 8%;
+}
+
+.contact-box {
+    max-width: 700px;
+    margin: auto;
+    background: white;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.contact-box h1 {
+    text-align: center;
+    color: #5b3cc4;
+    margin-bottom: 25px;
+}
+
+.contact-btn {
+    width: 100%;
+    padding: 14px;
+    margin-top: 15px;
+    border: none;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    font-size: 17px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+.footer {
+    text-align: center;
+    padding: 25px;
+    color: white;
+    margin-top: 30px;
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 900px) {
+
+    .card-container,
+    .stage-container {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .navbar {
+        padding: 15px 20px;
+        flex-direction: column;
+        gap: 15px;
+    }
+}
+
+@media (max-width: 600px) {
+
+    .card-container,
+    .stage-container {
+        grid-template-columns: 1fr;
+    }
+
+    .hero {
+        padding: 35px 20px;
+    }
+
+    .hero h1 {
+        font-size: 32px;
+    }
+
+    .login-box,
+    .register-box {
+        width: 100%;
+    }
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     LOGIN PAGE
+===================================================== -->
+
+<div id="loginPage" class="page active">
+
+    <div class="login-page">
+
+        <div class="login-box">
+
+            <div class="login-logo">🤖</div>
+
+            <h1>AI Powered SDLC</h1>
+
+            <p>Sign in to continue to your dashboard</p>
+
+            <form onsubmit="login(event)">
+
+                <input
+                    type="text"
+                    id="loginUsername"
+                    class="input-box"
+                    placeholder="Username"
+                    required
+                >
+
+                <input
+                    type="password"
+                    id="loginPassword"
+                    class="input-box"
+                    placeholder="Password"
+                    required
+                >
+
+                <button type="submit" class="main-btn">
+                    🔐 Sign In
+                </button>
+
+            </form>
+
+            <div class="signup-text">
+
+                Don't have an account?
+
+                <button
+                    class="link-btn"
+                    onclick="showPage('registerPage')"
+                >
+                    Sign Up
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- =====================================================
+     REGISTER PAGE
+===================================================== -->
+
+<div id="registerPage" class="page">
+
+    <div class="register-page">
+
+        <div class="register-box">
+
+            <h1>📝 Create Account</h1>
+
+            <p class="subtitle">
+                Register for AI Powered SDLC
+            </p>
+
+            <form onsubmit="createAccount(event)">
+
+                <input
+                    type="text"
+                    class="input-box"
+                    placeholder="Full Name"
+                    required
+                >
+
+                <input
+                    type="text"
+                    class="input-box"
+                    placeholder="Username"
+                    required
+                >
+
+                <input
+                    type="email"
+                    class="input-box"
+                    placeholder="Email Address"
+                    required
+                >
+
+                <input
+                    type="password"
+                    id="registerPassword"
+                    class="input-box"
+                    placeholder="Password"
+                    required
+                >
+
+                <input
+                    type="password"
+                    id="confirmPassword"
+                    class="input-box"
+                    placeholder="Confirm Password"
+                    required
+                >
+
+                <button type="submit" class="register-btn">
+                    ✅ Create Account
+                </button>
+
+            </form>
+
+            <div style="text-align:center; margin-top:20px;">
+
+                Already have an account?
+
+                <button
+                    class="link-btn"
+                    onclick="showPage('loginPage')"
+                >
+                    Sign In
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- =====================================================
+     HOME PAGE
+===================================================== -->
+
+<div id="homePage" class="page">
+
+    <nav class="navbar">
+
+        <div class="logo">
+            🤖 AI Powered SDLC
+        </div>
+
+        <div class="nav-buttons">
+
+            <button class="nav-btn" onclick="showPage('homePage')">
+                🏠 Home
+            </button>
+
+            <button class="nav-btn" onclick="showPage('stagesPage')">
+                📊 SDLC Stages
+            </button>
+
+            <button class="nav-btn" onclick="showPage('aiPage')">
+                🤖 AI Tools
+            </button>
+
+            <button class="nav-btn" onclick="showPage('contactPage')">
+                📞 Contact
+            </button>
+
+            <button class="nav-btn logout-btn" onclick="logout()">
+                Logout
+            </button>
+
+        </div>
+
+    </nav>
+
+
+    <div class="home-container">
+
+        <div class="hero">
+
+            <h1>🤖 AI Powered SDLC</h1>
+
+            <h2>Software Development Life Cycle</h2>
+
+            <p>
+                Use Artificial Intelligence to understand,
+                analyze and manage every stage of software
+                development.
+            </p>
+
+            <button
+                class="hero-btn"
+                onclick="showPage('stagesPage')"
+            >
+                🚀 Explore SDLC Stages
+            </button>
+
+        </div>
+
+
+        <div class="card-container">
+
+            <div class="card">
+
+                <div class="card-icon">📋</div>
+
+                <h3>Requirement</h3>
+
+                <p>
+                    Understand project requirements
+                    and identify user needs.
+                </p>
+
+            </div>
+
+
+            <div class="card">
+
+                <div class="card-icon">🎨</div>
+
+                <h3>Design</h3>
+
+                <p>
+                    Create system architecture,
+                    UI and database designs.
+                </p>
+
+            </div>
+
+
+            <div class="card">
+
+                <div class="card-icon">💻</div>
+
+                <h3>Development</h3>
+
+                <p>
+                    Convert the design into
+                    working software.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="footer">
+        © 2026 AI Powered SDLC | Academic Project
+    </div>
+
+</div>
+
+
+
+<!-- =====================================================
+     SDLC STAGES PAGE
+===================================================== -->
+
+<div id="stagesPage" class="page">
+
+    <nav class="navbar">
+
+        <div class="logo">
+            🤖 AI Powered SDLC
+        </div>
+
+        <div class="nav-buttons">
+
+            <button class="nav-btn" onclick="showPage('homePage')">
+                🏠 Home
+            </button>
+
+            <button class="nav-btn" onclick="showPage('stagesPage')">
+                📊 SDLC Stages
+            </button>
+
+            <button class="nav-btn" onclick="showPage('aiPage')">
+                🤖 AI Tools
+            </button>
+
+            <button class="nav-btn" onclick="showPage('contactPage')">
+                📞 Contact
+            </button>
+
+        </div>
+
+    </nav>
+
+
+    <div class="section-container">
+
+        <div class="section-title">
+
+            <h1>📊 SDLC Stages</h1>
+
+            <p>
+                Six important stages of the
+                Software Development Life Cycle.
+            </p>
+
+        </div>
+
+
+        <div class="stage-container">
+
+            <div class="stage requirement">
+
+                <h2>📋 1. Requirement</h2>
+
+                <p>
+                    Collect and analyze user requirements.
+                    Identify what the software should do
+                    and define project objectives.
+                </p>
+
+            </div>
+
+
+            <div class="stage design">
+
+                <h2>🎨 2. Design</h2>
+
+                <p>
+                    Create the system architecture,
+                    database structure, user interface
+                    and technical design.
+                </p>
+
+            </div>
+
+
+            <div class="stage development">
+
+                <h2>💻 3. Development</h2>
+
+                <p>
+                    Developers write the source code
+                    and convert the system design
+                    into working software.
+                </p>
+
+            </div>
+
+
+            <div class="stage testing">
+
+                <h2>🧪 4. Testing</h2>
+
+                <p>
+                    Test the application to find bugs,
+                    errors and performance issues
+                    before release.
+                </p>
+
+            </div>
+
+
+            <div class="stage deployment">
+
+                <h2>🚀 5. Deployment</h2>
+
+                <p>
+                    Release the completed software
+                    to users and make the application
+                    available in the production environment.
+                </p>
+
+            </div>
+
+
+            <div class="stage maintenance">
+
+                <h2>🔧 6. Maintenance</h2>
+
+                <p>
+                    Monitor the software, fix problems,
+                    improve features and provide
+                    regular updates.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <br>
+
+        <button
+            class="hero-btn"
+            onclick="showPage('homePage')"
+        >
+            ← Back to Home
+        </button>
+
+    </div>
+
+</div>
+
+
+
+<!-- =====================================================
+     AI TOOLS PAGE
+===================================================== -->
+
+<div id="aiPage" class="page">
+
+    <nav class="navbar">
+
+        <div class="logo">
+            🤖 AI Powered SDLC
+        </div>
+
+        <div class="nav-buttons">
+
+            <button class="nav-btn" onclick="showPage('homePage')">
+                🏠 Home
+            </button>
+
+            <button class="nav-btn" onclick="showPage('stagesPage')">
+                📊 SDLC Stages
+            </button>
+
+            <button class="nav-btn" onclick="showPage('aiPage')">
+                🤖 AI Tools
+            </button>
+
+            <button class="nav-btn" onclick="showPage('contactPage')">
+                📞 Contact
+            </button>
+
+        </div>
+
+    </nav>
+
+
+    <div class="ai-container">
+
+        <div class="ai-box">
+
+            <h1>🤖 AI SDLC Analyzer</h1>
+
+            <p>
+                Enter your project requirement and the system
+                will generate a domain-specific SDLC plan.
+            </p>
+
+
+            <textarea
+                id="projectRequirement"
+                placeholder="Example: I want to develop a hospital management system where patients can register, book appointments, view prescriptions and check medical records..."
+            ></textarea>
+
+
+            <button
+                class="analyze-btn"
+                onclick="analyzeProject()"
+            >
+                🤖 Analyze with AI
+            </button>
+
+
+            <div id="aiOutput" class="output">
+
+                <h2>📊 AI Generated SDLC Plan</h2>
+
+                <div id="resultText"></div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- =====================================================
+     CONTACT PAGE
+===================================================== -->
+
+<div id="contactPage" class="page">
+
+    <nav class="navbar">
+
+        <div class="logo">
+            🤖 AI Powered SDLC
+        </div>
+
+        <div class="nav-buttons">
+
+            <button class="nav-btn" onclick="showPage('homePage')">
+                🏠 Home
+            </button>
+
+            <button class="nav-btn" onclick="showPage('stagesPage')">
+                📊 SDLC Stages
+            </button>
+
+            <button class="nav-btn" onclick="showPage('aiPage')">
+                🤖 AI Tools
+            </button>
+
+            <button class="nav-btn" onclick="showPage('contactPage')">
+                📞 Contact
+            </button>
+
+        </div>
+
+    </nav>
+
+
+    <div class="contact-container">
+
+        <div class="contact-box">
+
+            <h1>📞 Contact Us</h1>
+
+            <form onsubmit="submitContact(event)">
+
+                <input
+                    type="text"
+                    class="input-box"
+                    placeholder="Your Name"
+                    required
+                >
+
+                <input
+                    type="email"
+                    class="input-box"
+                    placeholder="Your Email"
+                    required
+                >
+
+                <textarea
+                    placeholder="Enter your message..."
+                    required
+                ></textarea>
+
+                <button
+                    type="submit"
+                    class="contact-btn"
+                >
+                    📩 Send Message
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- =====================================================
+     JAVASCRIPT
+===================================================== -->
+
+<script>
+
+
+/* =========================
+   PAGE SWITCHING
+========================= */
+
+function showPage(pageId) {
+
+    let pages = document.querySelectorAll(".page");
+
+    pages.forEach(function(page) {
+        page.classList.remove("active");
+    });
+
+    document
+        .getElementById(pageId)
+        .classList.add("active");
+
+    window.scrollTo(0, 0);
+}
+
+
+/* =========================
+   LOGIN
+========================= */
+
+function login(event) {
+
+    event.preventDefault();
+
+    let username =
+        document.getElementById("loginUsername").value;
+
+    let password =
+        document.getElementById("loginPassword").value;
+
+    if (username === "" || password === "") {
+
+        alert("Please enter username and password.");
+
+        return;
+    }
+
+    alert("Login successful!");
+
+    showPage("homePage");
+}
+
+
+/* =========================
+   CREATE ACCOUNT
+========================= */
+
+function createAccount(event) {
+
+    event.preventDefault();
+
+    let password =
+        document.getElementById("registerPassword").value;
+
+    let confirmPassword =
+        document.getElementById("confirmPassword").value;
+
+    if (password !== confirmPassword) {
+
+        alert("Password and Confirm Password do not match.");
+
+        return;
+    }
+
+    alert(
+        "Account created successfully! Please sign in."
+    );
+
+    showPage("loginPage");
+}
+
+
+/* =========================
+   LOGOUT
+========================= */
+
+function logout() {
+
+    alert("You have been logged out.");
+
+    showPage("loginPage");
+}
+
+
+/* =====================================================
+   AI SDLC ANALYZER
+   DOMAIN-SPECIFIC OUTPUT
+===================================================== */
+
+function analyzeProject() {
+
+    let requirement =
+        document.getElementById("projectRequirement").value.trim();
+
+
+    if (requirement === "") {
+
+        alert("Please enter your project requirement.");
+
+        return;
+    }
+
+
+    let text = requirement.toLowerCase();
+
+    let projectType = "General Software Project";
+
+    let requirementPoints = [];
+    let designPoints = [];
+    let developmentPoints = [];
+    let testingPoints = [];
+    let deploymentPoints = [];
+    let maintenancePoints = [];
+
+
+    /* =================================================
+       HOSPITAL MANAGEMENT SYSTEM
+    ================================================= */
+
+    if (
+        text.includes("hospital") ||
+        text.includes("healthcare") ||
+        text.includes("patient") ||
+        text.includes("medical")
+    ) {
+
+        projectType = "Hospital Management System";
+
+        requirementPoints = [
+
+            "Patient registration and profile management",
+
+            "Doctor registration and specialization management",
+
+            "Appointment booking and doctor availability",
+
+            "Electronic medical record management",
+
+            "Prescription and medication management",
+
+            "Laboratory test and medical report management",
+
+            "Pharmacy and medicine inventory management",
+
+            "Hospital billing and payment management",
+
+            "Role-based access for Admin, Doctor, Nurse, Receptionist and Patient",
+
+            "Patient medical history and treatment tracking"
+
+        ];
+
+
+        designPoints = [
+
+            "Design Patient, Doctor, Appointment and Medical Record database tables",
+
+            "Design Prescription, Laboratory, Pharmacy and Billing modules",
+
+            "Create separate dashboards for Admin, Doctor, Nurse and Patient",
+
+            "Design appointment scheduling with doctor availability",
+
+            "Design secure patient medical-history interface",
+
+            "Design relationship between patients, doctors, prescriptions and appointments",
+
+            "Design notification system for appointments and medical updates"
+
+        ];
+
+
+        developmentPoints = [
+
+            "Develop patient registration and login",
+
+            "Develop doctor and staff management",
+
+            "Develop appointment booking and scheduling",
+
+            "Develop electronic medical records",
+
+            "Develop prescription management",
+
+            "Develop laboratory test and report module",
+
+            "Develop pharmacy inventory module",
+
+            "Develop hospital billing module",
+
+            "Implement role-based authentication and authorization",
+
+            "Implement appointment and medical notifications"
+
+        ];
+
+
+        testingPoints = [
+
+            "Test patient registration and login",
+
+            "Test appointment booking and prevent double booking",
+
+            "Test doctor availability and scheduling",
+
+            "Test patient medical-record access",
+
+            "Test prescription creation and validation",
+
+            "Test laboratory report upload and retrieval",
+
+            "Test billing calculations",
+
+            "Test role-based permissions",
+
+            "Test patient-data security and privacy",
+
+            "Perform integration testing between hospital modules"
+
+        ];
+
+
+        deploymentPoints = [
+
+            "Deploy hospital management application on a secure server",
+
+            "Configure production database",
+
+            "Create administrator and staff accounts",
+
+            "Configure secure HTTPS access",
+
+            "Set up database backup",
+
+            "Train hospital staff to use the system",
+
+            "Monitor system performance after deployment"
+
+        ];
+
+
+        maintenancePoints = [
+
+            "Update patient and doctor management features",
+
+            "Fix appointment and scheduling issues",
+
+            "Maintain medical records and database integrity",
+
+            "Update medicine and pharmacy information",
+
+            "Monitor billing and payment functionality",
+
+            "Apply security patches and access-control updates",
+
+            "Perform regular database backups",
+
+            "Add new hospital departments and features when required"
+
+        ];
+
+    }
+
+
+    /* =================================================
+       BANKING SYSTEM
+    ================================================= */
+
+    else if (
+        text.includes("bank") ||
+        text.includes("banking") ||
+        text.includes("transaction") ||
+        text.includes("account") ||
+        text.includes("loan")
+    ) {
+
+        projectType = "Banking Management System";
+
+        requirementPoints = [
+
+            "Customer registration and profile management",
+
+            "KYC verification and customer identification",
+
+            "Savings and current account management",
+
+            "Deposit and withdrawal management",
+
+            "Fund transfer between accounts",
+
+            "Beneficiary management",
+
+            "Transaction history and account statements",
+
+            "Loan application and loan management",
+
+            "Interest calculation",
+
+            "ATM and debit-card management",
+
+            "OTP and multi-factor authentication",
+
+            "Fraud detection and suspicious transaction monitoring"
+
+        ];
+
+
+        designPoints = [
+
+            "Design Customer, Account and Transaction database tables",
+
+            "Design KYC verification workflow",
+
+            "Design secure fund-transfer architecture",
+
+            "Design beneficiary and transaction modules",
+
+            "Design loan, interest and repayment modules",
+
+            "Design banking dashboard and account statement interface",
+
+            "Design role-based access for Customer, Bank Staff and Administrator",
+
+            "Design authentication, OTP and security mechanisms",
+
+            "Design transaction audit and logging system"
+
+        ];
+
+
+        developmentPoints = [
+
+            "Develop customer registration and KYC module",
+
+            "Develop savings and current account management",
+
+            "Develop deposit and withdrawal functions",
+
+            "Develop fund-transfer functionality",
+
+            "Develop beneficiary management",
+
+            "Develop transaction history and statements",
+
+            "Develop loan application and repayment module",
+
+            "Develop interest calculation",
+
+            "Develop debit-card and ATM management",
+
+            "Implement OTP and multi-factor authentication",
+
+            "Implement transaction notifications",
+
+            "Implement fraud-monitoring rules"
+
+        ];
+
+
+        testingPoints = [
+
+            "Test customer registration and KYC validation",
+
+            "Test account creation and account status",
+
+            "Test deposit and withdrawal calculations",
+
+            "Test fund transfer and balance updates",
+
+            "Test insufficient-balance conditions",
+
+            "Test beneficiary verification",
+
+            "Test transaction history and statements",
+
+            "Test loan interest and repayment calculations",
+
+            "Test OTP and authentication",
+
+            "Test unauthorized account access",
+
+            "Test transaction security and audit logs",
+
+            "Perform performance testing for concurrent transactions"
+
+        ];
+
+
+        deploymentPoints = [
+
+            "Deploy banking application on secure production infrastructure",
+
+            "Configure encrypted production database",
+
+            "Configure HTTPS and secure authentication",
+
+            "Set up database replication and backup",
+
+            "Configure transaction monitoring",
+
+            "Configure SMS/email/OTP services",
+
+            "Monitor system availability and transaction processing",
+
+            "Perform security verification before production release"
+
+        ];
+
+
+        maintenancePoints = [
+
+            "Monitor banking transactions and system availability",
+
+            "Apply security patches",
+
+            "Maintain KYC and customer information",
+
+            "Update banking rules and interest rates",
+
+            "Maintain loan and repayment calculations",
+
+            "Monitor suspicious transactions",
+
+            "Perform regular database backup and recovery testing",
+
+            "Update authentication and fraud-prevention mechanisms"
+
+        ];
+
+    }
+
+
+    /* =================================================
+       E-COMMERCE
+    ================================================= */
+
+    else if (
+        text.includes("shopping") ||
+        text.includes("e-commerce") ||
+        text.includes("ecommerce") ||
+        text.includes("online store") ||
+        text.includes("products")
+    ) {
+
+        projectType = "E-Commerce Management System";
+
+        requirementPoints = [
+
+            "Customer registration and login",
+
+            "Product catalog and product categories",
+
+            "Product search and filtering",
+
+            "Shopping cart management",
+
+            "Wishlist management",
+
+            "Order placement and order tracking",
+
+            "Online payment processing",
+
+            "Inventory management",
+
+            "Delivery and shipping management",
+
+            "Customer reviews and ratings",
+
+            "Admin product and order management"
+
+        ];
+
+
+        designPoints = [
+
+            "Design Customer, Product, Cart and Order database tables",
+
+            "Design payment and transaction architecture",
+
+            "Design inventory management system",
+
+            "Design product search and filtering",
+
+            "Design customer and administrator dashboards",
+
+            "Design order and delivery tracking workflow",
+
+            "Design secure payment integration",
+
+            "Design product review and rating module"
+
+        ];
+
+
+        developmentPoints = [
+
+            "Develop customer registration and login",
+
+            "Develop product catalog",
+
+            "Develop search and filtering",
+
+            "Develop shopping cart and wishlist",
+
+            "Develop checkout and payment",
+
+            "Develop order management",
+
+            "Develop inventory management",
+
+            "Develop delivery tracking",
+
+            "Develop review and rating system",
+
+            "Develop admin dashboard"
+
+        ];
+
+
+        testingPoints = [
+
+            "Test customer registration and login",
+
+            "Test product search and filtering",
+
+            "Test cart calculations",
+
+            "Test stock availability",
+
+            "Test checkout and payment",
+
+            "Test order creation and cancellation",
+
+            "Test delivery tracking",
+
+            "Test admin permissions",
+
+            "Test payment-security scenarios"
+
+        ];
+
+
+        deploymentPoints = [
+
+            "Deploy web application to production server",
+
+            "Configure production database",
+
+            "Configure payment gateway",
+
+            "Configure shipping services",
+
+            "Enable HTTPS",
+
+            "Configure backup and monitoring"
+
+        ];
+
+
+        maintenancePoints = [
+
+            "Update product catalog",
+
+            "Maintain inventory information",
+
+            "Monitor payment failures",
+
+            "Fix order and delivery issues",
+
+            "Update security patches",
+
+            "Improve search and recommendation features",
+
+            "Maintain database backups"
+
+        ];
+
+    }
+
+
+    /* =================================================
+       COLLEGE / STUDENT MANAGEMENT
+    ================================================= */
+
+    else if (
+        text.includes("college") ||
+        text.includes("student") ||
+        text.includes("university") ||
+        text.includes("attendance") ||
+        text.includes("marks")
+    ) {
+
+        projectType = "College Student Management System";
+
+        requirementPoints = [
+
+            "Student registration and profile management",
+
+            "Student attendance management",
+
+            "Marks and examination management",
+
+            "Faculty and department management",
+
+            "Timetable management",
+
+            "Course and subject management",
+
+            "Fee management",
+
+            "Assignment and academic information",
+
+            "Student result generation",
+
+            "Role-based access for Admin, Faculty and Students"
+
+        ];
+
+
+        designPoints = [
+
+            "Design Student, Faculty, Department and Course database tables",
+
+            "Design attendance management module",
+
+            "Design marks and examination module",
+
+            "Design timetable structure",
+
+            "Design student and faculty dashboards",
+
+            "Design fee and payment module",
+
+            "Design academic report generation",
+
+            "Design role-based authentication"
+
+        ];
+
+
+        developmentPoints = [
+
+            "Develop student registration and login",
+
+            "Develop student profile",
+
+            "Develop attendance module",
+
+            "Develop marks entry and result generation",
+
+            "Develop faculty management",
+
+            "Develop timetable management",
+
+            "Develop course management",
+
+            "Develop fee management",
+
+            "Develop student dashboard",
+
+            "Develop administrator dashboard"
+
+        ];
+
+
+        testingPoints = [
+
+            "Test student registration",
+
+            "Test attendance calculations",
+
+            "Test marks and grade calculations",
+
+            "Test timetable conflicts",
+
+            "Test fee calculations",
+
+            "Test result generation",
+
+            "Test faculty permissions",
+
+            "Test student-data access control",
+
+            "Perform database and integration testing"
+
+        ];
+
+
+        deploymentPoints = [
+
+            "Deploy college management application",
+
+            "Configure production database",
+
+            "Create administrator and faculty accounts",
+
+            "Configure backup system",
+
+            "Train staff and faculty",
+
+            "Monitor application usage"
+
+        ];
+
+
+        maintenancePoints = [
+
+            "Update student records",
+
+            "Maintain attendance data",
+
+            "Update subjects and courses",
+
+            "Maintain examination and result modules",
+
+            "Update timetable information",
+
+            "Fix academic-management issues",
+
+            "Perform regular database backups"
+
+        ];
+
+    }
+
+
+    /* =================================================
+       FOOD DELIVERY
+    ================================================= */
+
+    else if (
+        text.includes("food") ||
+        text.includes("restaurant") ||
+        text.includes("delivery")
+    ) {
+
+        projectType = "Food Delivery Management System";
+
+        requirementPoints = [
+
+            "Customer registration and login",
+
+            "Restaurant registration and management",
+
+            "Food menu management",
+
+            "Food search and category filtering",
+
+            "Cart management",
+
+            "Online food ordering",
+
+            "Online payment",
+
+            "Order status tracking",
+
+            "Delivery partner management",
+
+            "Restaurant order management",
+
+            "Customer reviews and ratings"
+
+        ];
+
+
+        designPoints = [
+
+            "Design Customer, Restaurant, Menu and Order database tables",
+
+            "Design food-cart and checkout workflow",
+
+            "Design payment integration",
+
+            "Design delivery assignment system",
+
+            "Design restaurant dashboard",
+
+            "Design customer order-tracking interface",
+
+            "Design notification system",
+
+            "Design review and rating module"
+
+        ];
+
+
+        developmentPoints = [
+
+            "Develop customer registration",
+
+            "Develop restaurant management",
+
+            "Develop food menu",
+
+            "Develop cart and checkout",
+
+            "Develop online payment",
+
+            "Develop order management",
+
+            "Develop delivery tracking",
+
+            "Develop restaurant dashboard",
+
+            "Develop customer reviews",
+
+            "Develop notifications"
+
+        ];
+
+
+        testingPoints = [
+
+            "Test restaurant registration",
+
+            "Test menu and food availability",
+
+            "Test cart calculations",
+
+            "Test order placement",
+
+            "Test payment processing",
+
+            "Test order status updates",
+
+            "Test delivery assignment",
+
+            "Test cancellation and refund",
+
+            "Test customer and restaurant permissions"
+
+        ];
+
+
+        deploymentPoints = [
+
+            "Deploy food delivery application",
+
+            "Configure payment gateway",
+
+            "Configure maps or location services",
+
+            "Configure notification services",
+
+            "Configure production database",
+
+            "Enable monitoring and backups"
+
+        ];
+
+
+        maintenancePoints = [
+
+            "Maintain restaurant and menu information",
+
+            "Monitor order processing",
+
+            "Maintain delivery tracking",
+
+            "Monitor payment failures",
+
+            "Update restaurant availability",
+
+            "Fix customer-order issues",
+
+            "Maintain database backups"
+
+        ];
+
+    }
+
+
+    /* =================================================
+       EDUCATION MANAGEMENT SYSTEM
+       ADDED - EDUCATION SPECIFIC
+    ================================================= */
+
+    else if (
+        text.includes("education") ||
+        text.includes("school") ||
+        text.includes("learning") ||
+        text.includes("e-learning") ||
+        text.includes("elearning") ||
+        text.includes("online learning") ||
+        text.includes("teacher") ||
+        text.includes("faculty") ||
+        text.includes("classroom") ||
+        text.includes("course") ||
+        text.includes("student learning") ||
+        text.includes("educational")
+    ) {
+
+        projectType = "Education Management System";
+
+        requirementPoints = [
+
+            "Student registration and student profile management",
+
+            "Teacher and faculty registration and profile management",
+
+            "Course and subject management",
+
+            "Online learning and educational content management",
+
+            "Classroom and timetable management",
+
+            "Assignment and submission management",
+
+            "Attendance management",
+
+            "Examination and assessment management",
+
+            "Marks, grades and result management",
+
+            "Study materials and learning-resource management",
+
+            "Student-teacher communication",
+
+            "Notifications for classes, assignments and examinations",
+
+            "Role-based access for Admin, Teacher and Student"
+
+        ];
+
+
+        designPoints = [
+
+            "Design Student, Teacher, Course and Subject database tables",
+
+            "Design classroom and timetable management structure",
+
+            "Design online learning and course-content modules",
+
+            "Design assignment and submission workflow",
+
+            "Design attendance management system",
+
+            "Design examination and assessment module",
+
+            "Design marks and result management",
+
+            "Design separate dashboards for Admin, Teacher and Student",
+
+            "Design learning-material and resource management",
+
+            "Design notification and communication system",
+
+            "Design role-based authentication and authorization"
+
+        ];
+
+
+        developmentPoints = [
+
+            "Develop student registration and login",
+
+            "Develop teacher and faculty management",
+
+            "Develop course and subject management",
+
+            "Develop online learning module",
+
+            "Develop classroom and timetable management",
+
+            "Develop assignment creation and submission",
+
+            "Develop attendance management",
+
+            "Develop examination and assessment module",
+
+            "Develop marks and grade management",
+
+            "Develop result generation",
+
+            "Develop study-material upload and access",
+
+            "Develop student-teacher communication",
+
+            "Implement role-based authentication and authorization",
+
+            "Implement notifications for academic activities"
+
+        ];
+
+
+        testingPoints = [
+
+            "Test student registration and login",
+
+            "Test teacher and faculty registration",
+
+            "Test course and subject management",
+
+            "Test classroom and timetable scheduling",
+
+            "Test assignment creation and submission",
+
+            "Test attendance calculations",
+
+            "Test examination and assessment functions",
+
+            "Test marks and grade calculations",
+
+            "Test result generation",
+
+            "Test study-material upload and download",
+
+            "Test student-teacher communication",
+
+            "Test role-based permissions",
+
+            "Test notification functionality",
+
+            "Perform integration testing between education modules"
+
+        ];
+
+
+        deploymentPoints = [
+
+            "Deploy education management application on a production server",
+
+            "Configure production database",
+
+            "Create administrator, teacher and student accounts",
+
+            "Configure secure HTTPS access",
+
+            "Configure database backup",
+
+            "Configure notification services",
+
+            "Upload initial courses and educational content",
+
+            "Train administrators and teachers to use the system",
+
+            "Monitor system performance after deployment"
+
+        ];
+
+
+        maintenancePoints = [
+
+            "Maintain student and teacher information",
+
+            "Update courses and subjects",
+
+            "Maintain classroom and timetable information",
+
+            "Monitor assignment and submission functionality",
+
+            "Maintain attendance records",
+
+            "Update examination and assessment modules",
+
+            "Maintain marks and result information",
+
+            "Update study materials and educational resources",
+
+            "Fix learning-platform and user-access issues",
+
+            "Apply security updates",
+
+            "Perform regular database backups",
+
+            "Add new educational features when required"
+
+        ];
+
+    }
+
+
+    /* =================================================
+       GENERAL PROJECT
+    ================================================= */
+
+    else {
+
+        projectType = "General Software Project";
+
+        requirementPoints = [
+
+            "Identify target users and stakeholders",
+
+            "Define functional requirements",
+
+            "Define non-functional requirements",
+
+            "Identify project objectives",
+
+            "Define user roles and permissions",
+
+            "Identify required data and business rules",
+
+            "Define project scope and constraints"
+
+        ];
+
+
+        designPoints = [
+
+            "Design overall system architecture",
+
+            "Design database structure",
+
+            "Design user interface and user experience",
+
+            "Design application modules",
+
+            "Define API and system communication",
+
+            "Design authentication and authorization",
+
+            "Prepare technical architecture"
+
+        ];
+
+
+        developmentPoints = [
+
+            "Develop authentication and user management",
+
+            "Develop core application modules",
+
+            "Implement database operations",
+
+            "Develop user interface",
+
+            "Implement APIs",
+
+            "Integrate required third-party services",
+
+            "Implement validation and error handling"
+
+        ];
+
+
+        testingPoints = [
+
+            "Perform functional testing",
+
+            "Perform unit testing",
+
+            "Perform integration testing",
+
+            "Perform system testing",
+
+            "Perform user acceptance testing",
+
+            "Test security and authorization",
+
+            "Test application performance"
+
+        ];
+
+
+        deploymentPoints = [
+
+            "Prepare production environment",
+
+            "Configure production database",
+
+            "Deploy application",
+
+            "Configure domain and HTTPS",
+
+            "Configure backups",
+
+            "Monitor application after release"
+
+        ];
+
+
+        maintenancePoints = [
+
+            "Fix reported bugs",
+
+            "Monitor application performance",
+
+            "Apply security updates",
+
+            "Maintain database",
+
+            "Improve existing features",
+
+            "Add new features based on requirements",
+
+            "Perform regular backups"
+
+        ];
+
+    }
+
+
+    /* =================================================
+       CREATE OUTPUT
+    ================================================= */
+
+    let output = `
+
+        <div class="project-title">
+
+            <h3>🎯 ${projectType}</h3>
+
+            <p>
+                <b>Project Requirement:</b><br>
+                ${requirement}
+            </p>
+
+        </div>
+
+
+        <div class="output-section">
+
+            <h3>📋 1. Requirement Analysis</h3>
+
+            <ul>
+                ${requirementPoints.map(item => `<li>${item}</li>`).join("")}
+            </ul>
+
+        </div>
+
+
+        <div class="output-section">
+
+            <h3>🎨 2. Design</h3>
+
+            <ul>
+                ${designPoints.map(item => `<li>${item}</li>`).join("")}
+            </ul>
+
+        </div>
+
+
+        <div class="output-section">
+
+            <h3>💻 3. Development</h3>
+
+            <ul>
+                ${developmentPoints.map(item => `<li>${item}</li>`).join("")}
+            </ul>
+
+        </div>
+
+
+        <div class="output-section">
+
+            <h3>🧪 4. Testing</h3>
+
+            <ul>
+                ${testingPoints.map(item => `<li>${item}</li>`).join("")}
+            </ul>
+
+        </div>
+
+
+        <div class="output-section">
+
+            <h3>🚀 5. Deployment</h3>
+
+            <ul>
+                ${deploymentPoints.map(item => `<li>${item}</li>`).join("")}
+            </ul>
+
+        </div>
+
+
+        <div class="output-section">
+
+            <h3>🔧 6. Maintenance</h3>
+
+            <ul>
+                ${maintenancePoints.map(item => `<li>${item}</li>`).join("")}
+            </ul>
+
+        </div>
+
+    `;
+
+
+    document.getElementById("resultText").innerHTML = output;
+
+    document.getElementById("aiOutput").style.display = "block";
+
+}
+
+
+/* =========================
+   CONTACT FORM
+========================= */
+
+function submitContact(event) {
+
+    event.preventDefault();
+
+    alert(
+        "Thank you! Your message has been submitted."
+    );
+
+}
+
+</script>
+
+</body>
+</html>

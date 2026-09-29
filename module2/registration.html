@@ -1,0 +1,1002 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <!-- HTML5 -->
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Prathyusha Engineering College</title>
+
+
+    <!-- CSS3 -->
+    <style>
+
+        /* CSS3 RESET */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+
+        /* CSS3 GRADIENT BACKGROUND */
+
+        body {
+
+            min-height: 100vh;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #0f172a,
+                    #2563eb,
+                    #7c3aed
+                );
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            padding: 30px;
+        }
+
+
+        /* MAIN CONTAINER */
+
+        .container {
+
+            width: 100%;
+
+            max-width: 850px;
+
+            background: white;
+
+            border-radius: 25px;
+
+            overflow: hidden;
+
+            box-shadow:
+                0 25px 60px
+                rgba(0, 0, 0, 0.35);
+
+            animation: appear 0.8s ease;
+        }
+
+
+        /* CSS3 ANIMATION */
+
+        @keyframes appear {
+
+            from {
+
+                opacity: 0;
+
+                transform: translateY(30px);
+            }
+
+            to {
+
+                opacity: 1;
+
+                transform: translateY(0);
+            }
+        }
+
+
+        /* COLLEGE HEADER */
+
+        .college-header {
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #1e3a8a,
+                    #4f46e5
+                );
+
+            color: white;
+
+            text-align: center;
+
+            padding: 28px;
+        }
+
+
+        .college-header h1 {
+
+            font-size: 30px;
+
+            letter-spacing: 1px;
+
+            margin-bottom: 8px;
+        }
+
+
+        .college-header p {
+
+            font-size: 14px;
+
+            color: #e0e7ff;
+        }
+
+
+        /* REGISTRATION PAGE */
+
+        .registration-page {
+
+            padding: 40px 55px;
+
+            display: block;
+        }
+
+
+        /* SUCCESS PAGE */
+
+        .success-page {
+
+            padding: 70px 40px;
+
+            text-align: center;
+
+            display: none;
+        }
+
+
+        /* TITLE */
+
+        .title {
+
+            text-align: center;
+
+            margin-bottom: 30px;
+        }
+
+
+        .title h2 {
+
+            color: #111827;
+
+            font-size: 30px;
+
+            margin-bottom: 8px;
+        }
+
+
+        .title p {
+
+            color: #6b7280;
+
+            font-size: 14px;
+        }
+
+
+        /* FORM ROW */
+
+        .row {
+
+            display: flex;
+
+            gap: 18px;
+        }
+
+
+        /* FORM GROUP */
+
+        .form-group {
+
+            width: 50%;
+
+            margin-bottom: 18px;
+        }
+
+
+        .full {
+
+            width: 100%;
+        }
+
+
+        /* LABEL */
+
+        label {
+
+            display: block;
+
+            font-size: 14px;
+
+            font-weight: bold;
+
+            color: #374151;
+
+            margin-bottom: 7px;
+        }
+
+
+        /* HTML5 INPUT ELEMENTS */
+
+        input,
+        select,
+        textarea {
+
+            width: 100%;
+
+            padding: 13px 15px;
+
+            border: 1px solid #d1d5db;
+
+            border-radius: 10px;
+
+            background: #f9fafb;
+
+            font-size: 14px;
+
+            outline: none;
+
+            transition:
+                0.3s;
+        }
+
+
+        /* CSS3 :FOCUS */
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+
+            border-color: #4f46e5;
+
+            background: white;
+
+            box-shadow:
+                0 0 0 3px
+                rgba(79, 70, 229, 0.12);
+        }
+
+
+        /* TEXTAREA */
+
+        textarea {
+
+            height: 80px;
+
+            resize: none;
+        }
+
+
+        /* TERMS */
+
+        .terms {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 8px;
+
+            margin: 5px 0 22px;
+
+            color: #6b7280;
+
+            font-size: 13px;
+        }
+
+
+        .terms input {
+
+            width: auto;
+        }
+
+
+        /* SUBMIT BUTTON */
+
+        .submit-btn {
+
+            width: 100%;
+
+            padding: 15px;
+
+            border: none;
+
+            border-radius: 10px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #2563eb,
+                    #7c3aed
+                );
+
+            color: white;
+
+            font-size: 17px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition:
+                0.3s;
+        }
+
+
+        /* CSS3 HOVER */
+
+        .submit-btn:hover {
+
+            transform:
+                translateY(-3px);
+
+            box-shadow:
+                0 12px 25px
+                rgba(79, 70, 229, 0.35);
+        }
+
+
+        /* SUCCESS ICON */
+
+        .success-icon {
+
+            width: 100px;
+
+            height: 100px;
+
+            margin: 0 auto 25px;
+
+            background: #22c55e;
+
+            color: white;
+
+            border-radius: 50%;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            font-size: 55px;
+
+            box-shadow:
+                0 10px 30px
+                rgba(34, 197, 94, 0.3);
+
+            animation:
+                pop 0.6s ease;
+        }
+
+
+        /* SUCCESS ICON ANIMATION */
+
+        @keyframes pop {
+
+            0% {
+
+                transform: scale(0);
+            }
+
+            70% {
+
+                transform: scale(1.15);
+            }
+
+            100% {
+
+                transform: scale(1);
+            }
+        }
+
+
+        .success-page h2 {
+
+            color: #16a34a;
+
+            font-size: 32px;
+
+            margin-bottom: 15px;
+        }
+
+
+        .success-page h3 {
+
+            color: #1e3a8a;
+
+            font-size: 22px;
+
+            margin-bottom: 15px;
+        }
+
+
+        .success-page p {
+
+            color: #6b7280;
+
+            line-height: 1.7;
+
+            margin-bottom: 30px;
+        }
+
+
+        /* BACK BUTTON */
+
+        .back-btn {
+
+            padding: 13px 28px;
+
+            border: none;
+
+            border-radius: 10px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #2563eb,
+                    #7c3aed
+                );
+
+            color: white;
+
+            font-size: 15px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: 0.3s;
+        }
+
+
+        .back-btn:hover {
+
+            transform:
+                translateY(-2px);
+
+            box-shadow:
+                0 10px 20px
+                rgba(79, 70, 229, 0.3);
+        }
+
+
+        /* MOBILE DESIGN */
+
+        @media (max-width: 650px) {
+
+            body {
+
+                padding: 10px;
+            }
+
+
+            .registration-page {
+
+                padding: 30px 25px;
+            }
+
+
+            .row {
+
+                flex-direction: column;
+
+                gap: 0;
+            }
+
+
+            .form-group {
+
+                width: 100%;
+            }
+
+
+            .college-header h1 {
+
+                font-size: 23px;
+            }
+
+
+            .success-page {
+
+                padding: 50px 25px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <div class="container">
+
+
+        <!-- COLLEGE HEADER -->
+
+        <div class="college-header">
+
+            <h1>
+                PRATHYUSHA ENGINEERING COLLEGE
+            </h1>
+
+            <p>
+                College Management System
+            </p>
+
+        </div>
+
+
+
+        <!-- ========================= -->
+        <!-- REGISTRATION PAGE -->
+        <!-- ========================= -->
+
+        <div
+            id="registrationPage"
+            class="registration-page"
+        >
+
+            <div class="title">
+
+                <h2>
+                    College Management
+                </h2>
+
+                <p>
+                    Registration Page
+                </p>
+
+            </div>
+
+
+            <!-- HTML5 FORM -->
+
+            <form
+                onsubmit="submitForm(event)"
+            >
+
+
+                <!-- FULL NAME + ROLL NUMBER -->
+
+                <div class="row">
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Full Name
+                        </label>
+
+                        <input
+                            type="text"
+                            placeholder="Enter your full name"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Student Roll No
+                        </label>
+
+                        <input
+                            type="text"
+                            placeholder="Enter student roll number"
+                            required
+                        >
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- EMAIL + MOBILE -->
+
+                <div class="row">
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Email ID
+                        </label>
+
+                        <input
+                            type="email"
+                            placeholder="Enter your email ID"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Mobile Number
+                        </label>
+
+                        <input
+                            type="tel"
+                            placeholder="Enter 10 digit mobile number"
+                            pattern="[0-9]{10}"
+                            required
+                        >
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- DEPARTMENT + YEAR -->
+
+                <div class="row">
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Department
+                        </label>
+
+                        <select required>
+
+                            <option value="">
+                                Select Department
+                            </option>
+
+                            <option>
+                                Artificial Intelligence & Machine Learning
+                            </option>
+
+                            <option>
+                                Computer Science Engineering
+                            </option>
+
+                            <option>
+                                Information Technology
+                            </option>
+
+                            <option>
+                                Electronics & Communication Engineering
+                            </option>
+
+                            <option>
+                                Electrical & Electronics Engineering
+                            </option>
+
+                            <option>
+                                Mechanical Engineering
+                            </option>
+
+                            <option>
+                                Civil Engineering
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Year of Study
+                        </label>
+
+                        <select required>
+
+                            <option value="">
+                                Select Year
+                            </option>
+
+                            <option>
+                                1st Year
+                            </option>
+
+                            <option>
+                                2nd Year
+                            </option>
+
+                            <option>
+                                3rd Year
+                            </option>
+
+                            <option>
+                                4th Year
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- DOB + GENDER -->
+
+                <div class="row">
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Date of Birth
+                        </label>
+
+                        <input
+                            type="date"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Gender
+                        </label>
+
+                        <select required>
+
+                            <option value="">
+                                Select Gender
+                            </option>
+
+                            <option>
+                                Male
+                            </option>
+
+                            <option>
+                                Female
+                            </option>
+
+                            <option>
+                                Other
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- ADDRESS -->
+
+                <div class="form-group full">
+
+                    <label>
+                        Address
+                    </label>
+
+                    <textarea
+                        placeholder="Enter your complete address"
+                        required
+                    ></textarea>
+
+                </div>
+
+
+
+                <!-- PASSWORD + CONFIRM PASSWORD -->
+
+                <div class="row">
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Password
+                        </label>
+
+                        <input
+                            id="password"
+                            type="password"
+                            placeholder="Create password"
+                            minlength="6"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Confirm Password
+                        </label>
+
+                        <input
+                            id="confirmPassword"
+                            type="password"
+                            placeholder="Confirm password"
+                            required
+                        >
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- TERMS -->
+
+                <div class="terms">
+
+                    <input
+                        type="checkbox"
+                        required
+                    >
+
+                    <span>
+                        I agree to the College Management
+                        terms and conditions.
+                    </span>
+
+                </div>
+
+
+
+                <!-- SUBMIT -->
+
+                <button
+                    type="submit"
+                    class="submit-btn"
+                >
+                    Submit Registration
+                </button>
+
+
+            </form>
+
+        </div>
+
+
+
+        <!-- ========================= -->
+        <!-- SUCCESS PAGE -->
+        <!-- ========================= -->
+
+        <div
+            id="successPage"
+            class="success-page"
+        >
+
+
+            <div class="success-icon">
+
+                ✓
+
+            </div>
+
+
+            <h2>
+                Registration Successful!
+            </h2>
+
+
+            <h3>
+                PRATHYUSHA ENGINEERING COLLEGE
+            </h3>
+
+
+            <p>
+
+                Your registration has been
+                successfully completed.
+
+                <br>
+
+                Welcome to the
+                College Management System.
+
+            </p>
+
+
+            <button
+                class="back-btn"
+                onclick="goBack()"
+            >
+                Back to Registration
+            </button>
+
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- JAVASCRIPT -->
+
+    <script>
+
+
+        function submitForm(event) {
+
+            event.preventDefault();
+
+
+            /* GET PASSWORD */
+
+            let password =
+                document.getElementById("password").value;
+
+
+            let confirmPassword =
+                document.getElementById("confirmPassword").value;
+
+
+            /* CHECK PASSWORD */
+
+            if (password !== confirmPassword) {
+
+                alert(
+                    "Password and Confirm Password do not match!"
+                );
+
+                return;
+            }
+
+
+            /* HIDE REGISTRATION */
+
+            document.getElementById(
+                "registrationPage"
+            ).style.display = "none";
+
+
+            /* SHOW SUCCESS PAGE */
+
+            document.getElementById(
+                "successPage"
+            ).style.display = "block";
+
+        }
+
+
+
+        /* BACK TO REGISTRATION */
+
+        function goBack() {
+
+            document.getElementById(
+                "successPage"
+            ).style.display = "none";
+
+
+            document.getElementById(
+                "registrationPage"
+            ).style.display = "block";
+
+        }
+
+
+    </script>
+
+
+</body>
+
+</html>

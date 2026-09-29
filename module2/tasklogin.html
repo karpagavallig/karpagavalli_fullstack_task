@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Think & Learn - Employee Portal</title>
+
+    <script>
+
+        function showPage(page) {
+
+            document.getElementById("login").style.display = "none";
+            document.getElementById("register").style.display = "none";
+            document.getElementById("success").style.display = "none";
+
+            document.getElementById(page).style.display = "block";
+
+        }
+
+    </script>
+
+</head>
+
+
+<body bgcolor="#FFF8E7">
+
+
+<!-- ===================================================== -->
+<!-- LOGIN PAGE -->
+<!-- ===================================================== -->
+
+<div id="login">
+
+<center>
+
+<br><br>
+
+<!-- TOP BRAND -->
+
+<font color="#0000FF" size="5">
+    <b>THINK &amp; LEARN</b>
+</font>
+
+<br>
+
+<font color="#FF0000" size="3">
+    <b>EMPLOYEE PORTAL</b>
+</font>
+
+<br><br>
+
+
+<table width="950"
+       cellpadding="35"
+       cellspacing="0"
+       border="4"
+       bordercolor="#0000FF"
+       bgcolor="white">
+
+
+<tr>
+
+
+<!-- ================================================= -->
+<!-- LEFT SIDE -->
+<!-- ================================================= -->
+
+<td width="45%"
+    align="center"
+    bgcolor="#E6F0FF">
+
+
+<br><br>
+
+
+<font color="#0000FF" size="8">
+    <b>TL</b>
+</font>
+
+
+<br><br>
+
+
+<font color="#0000FF" size="6">
+    <b>THINK &amp; LEARN</b>
+</font>
+
+
+<br>
+
+
+<font color="#FF0000" size="4">
+    <b>EMPLOYEE PORTAL</b>
+</font>
+
+
+<br><br>
+
+
+<hr width="75%"
+    color="#0000FF">
+
+
+<br>
+
+
+<font color="#FF0000" size="5">
+    <i>
+        "Learn today,<br>
+        grow tomorrow."
+    </i>
+</font>
+
+
+<br><br>
+
+
+<font color="#0000FF" size="4">
+    <b>LEARN &bull; GROW &bull; ACHIEVE</b>
+</font>
+
+
+<br><br>
+
+
+<font color="#008000" size="3">
+    <b>BUILDING PEOPLE &bull; BUILDING FUTURES</b>
+</font>
+
+
+<br><br><br>
+
+
+<font color="#555555" size="3">
+
+    "Great things happen<br>
+    when we learn together."
+
+</font>
+
+
+<br><br>
+
+
+<!-- YELLOW HIGHLIGHT -->
+
+<table border="1"
+       bordercolor="#FFD700"
+       bgcolor="#FFF2CC"
+       cellpadding="10">
+
+<tr>
+
+<td align="center">
+
+<font color="#CC9900" size="3">
+    <b>LEARN • GROW • ACHIEVE</b>
+</font>
+
+</td>
+
+</tr>
+
+</table>
+
+
+<br><br>
+
+</td>
+
+
+<!-- ================================================= -->
+<!-- RIGHT LOGIN -->
+<!-- ================================================= -->
+
+<td width="55%"
+    align="center"
+    bgcolor="white">
+
+
+<br>
+
+
+<font color="#0000FF" size="7">
+    <b>LOGIN</b>
+</font>
+
+
+<br>
+
+
+<font color="#555555" size="3">
+    Welcome back to Think &amp; Learn
+</font>
+
+
+<br><br><br>
+
+
+<form>
+
+
+<!-- USERNAME -->
+
+<font color="#0000FF" size="4">
+    <b>User Name</b>
+</font>
+
+
+<br><br>
+
+
+<input type="text"
+       name="username"
+       size="42"
+       placeholder="Enter your user name"
+       required>
+
+
+<br><br><br>
+
+
+<!-- PASSWORD -->
+
+<font color="#0000FF" size="4">
+    <b>Password</b>
+</font>
+
+
+<br><br>
+
+
+<input type="password"
+       name="password"
+       size="36"
+       placeholder="Enter your password"
+       required>
+
+&nbsp;
+
+<font size="4">👁</font>
+
+
+<br><br><br>
+
+
+<!-- ================================================= -->
+<!-- BLUE SIGN IN BUTTON -->
+<!-- ================================================= -->
+
+<button type="button"
+        onclick="showPage('success')"
+        style="background-color:#0000FF;
+               color:white;
+               border:2px solid #000080;
+               padding:12px 45px;
+               font-size:18px;
+               font-weight:bold;">
+
+    SIGN IN
+
+</button>
+
+
+<br><br><br>
+
+
+<hr width="75%"
+    color="#0000FF">
+
+
+<br>
+
+
+<font color="#555555" size="3">
+    New employee?
+</font>
+
+
+<br><br>
+
+
+<!-- ================================================= -->
+<!-- GREEN SIGN UP BUTTON -->
+<!-- ================================================= -->
+
+<button type="button"
+        onclick="showPage('register')"
+        style="background-color:#008000;
+               color:white;
+               border:2px solid #006400;
+               padding:12px 45px;
+               font-size:18px;
+               font-weight:bold;">
+
+    SIGN UP
+
+</button>
+
+
+</form>
+
+
+<br><br>
+
+</td>
+
+
+</tr>
+
+</table>
+
+
+<br><br>
+
+
+<font color="#555555" size="2">
+
+    © 2026 Think &amp; Learn |
+    Employee Portal |
+    All Rights Reserved
+
+</font>
+
+
+</center>
+
+</div>
+
+
+<!-- ===================================================== -->
+<!-- REGISTER PAGE -->
+<!-- ===================================================== -->
+
+<div id="register"
+     style="display:none;">
+
+<center>
+
+<br><br>
+
+
+<font color="#0000FF" size="5">
+    <b>THINK &amp; LEARN</b>
+</font>
+
+<br>
+
+<font color="#FF0000" size="3">
+    <b>EMPLOYEE PORTAL</b>
+</font>
+
+<br><br>
+
+
+<table width="950"
+       cellpadding="30"
+       cellspacing="0"
+       border="4"
+       bordercolor="#0000FF"
+       bgcolor="white">
+
+
+<tr>
+
+
+<!-- ================================================= -->
+<!-- LEFT SIDE -->
+<!-- ================================================= -->
+
+<td width="40%"
+    align="center"
+    bgcolor="#E6F0FF">
+
+
+<br><br>
+
+
+<font color="#0000FF" size="8">
+    <b>TL</b>
+</font>
+
+
+<br><br>
+
+
+<font color="#0000FF" size="5">
+    <b>THINK &amp; LEARN</b>
+</font>
+
+
+<br><br>
+
+
+<font color="#FF0000" size="4">
+    <b>JOIN OUR TEAM</b>
+</font>
+
+
+<br><br>
+
+
+<hr width="75%"
+    color="#0000FF">
+
+
+<br>
+
+
+<font color="#FF0000" size="5">
+
+    <i>
+        "Every expert<br>
+        was once a beginner."
+    </i>
+
+</font>
+
+
+<br><br><br>
+
+
+<font color="#008000" size="4">
+
+    <b>
+
+        INNOVATE<br><br>
+        COLLABORATE<br><br>
+        GROW
+
+    </b>
+
+</font>
+
+
+<br><br>
+
+
+<table border="1"
+       bordercolor="#FFD700"
+       bgcolor="#FFF2CC"
+       cellpadding="10">
+
+<tr>
+
+<td align="center">
+
+<font color="#CC9900" size="3">
+    <b>WELCOME TO THE TEAM!</b>
+</font>
+
+</td>
+
+</tr>
+
+</table>
+
+
+<br><br>
+
+</td>
+
+
+<!-- ================================================= -->
+<!-- REGISTER FORM -->
+<!-- ================================================= -->
+
+<td width="60%"
+    align="center">
+
+
+<br>
+
+
+<font color="#0000FF" size="6">
+    <b>CREATE ACCOUNT</b>
+</font>
+
+
+<br>
+
+
+<font color="#555555" size="3">
+    Register as a Think &amp; Learn employee
+</font>
+
+
+<br><br>
+
+
+<form>
+
+
+<!-- FIRST NAME -->
+
+<font color="#0000FF" size="3">
+    <b>First Name</b>
+</font>
+
+
+<br><br>
+
+
+<input type="text"
+       name="firstname"
+       size="42"
+       placeholder="Enter first name"
+       required>
+
+
+<br><br>
+
+
+<!-- LAST NAME -->
+
+<font color="#0000FF" size="3">
+    <b>Last Name</b>
+</font>
+
+
+<br><br>
+
+
+<input type="text"
+       name="lastname"
+       size="42"
+       placeholder="Enter last name"
+       required>
+
+
+<br><br>
+
+
+<!-- EMPLOYEE ID -->
+
+<font color="#0000FF" size="3">
+    <b>Employee ID</b>
+</font>
+
+
+<br><br>
+
+
+<input type="text"
+       name="employeeid"
+       size="42"
+       placeholder="Example: EMP123"
+       pattern="[A-Za-z0-9]+"
+       required>
+
+
+<br><br>
+
+
+<!-- PASSWORD -->
+
+<font color="#0000FF" size="3">
+    <b>Password</b>
+</font>
+
+
+<br><br>
+
+
+<input type="password"
+       name="password"
+       size="36"
+       placeholder="Create password"
+       required>
+
+&nbsp;
+
+<font size="4">👁</font>
+
+
+<br><br><br>
+
+
+<!-- ================================================= -->
+<!-- BLUE CREATE ACCOUNT BUTTON -->
+<!-- ================================================= -->
+
+<button type="button"
+        onclick="showPage('login')"
+        style="background-color:#0000FF;
+               color:white;
+               border:2px solid #000080;
+               padding:12px 35px;
+               font-size:17px;
+               font-weight:bold;">
+
+    CREATE ACCOUNT
+
+</button>
+
+
+<br><br>
+
+
+<hr width="75%"
+    color="#0000FF">
+
+
+<br>
+
+
+<!-- ================================================= -->
+<!-- RED BACK BUTTON -->
+<!-- ================================================= -->
+
+<button type="button"
+        onclick="showPage('login')"
+        style="background-color:#FF0000;
+               color:white;
+               border:2px solid #990000;
+               padding:10px 30px;
+               font-size:16px;
+               font-weight:bold;">
+
+    ← BACK TO LOGIN
+
+</button>
+
+
+<br><br>
+
+</td>
+
+
+</tr>
+
+</table>
+
+
+<br><br>
+
+
+<font color="#555555" size="2">
+
+    © 2026 Think &amp; Learn | Employee Portal
+
+</font>
+
+
+</center>
+
+</div>
+
+
+<!-- ===================================================== -->
+<!-- SUCCESS PAGE -->
+<!-- ===================================================== -->
+
+<div id="success"
+     style="display:none;">
+
+<center>
+
+<br><br><br><br>
+
+
+<table width="700"
+       cellpadding="50"
+       cellspacing="0"
+       border="4"
+       bordercolor="#008000"
+       bgcolor="white">
+
+
+<tr>
+
+<td align="center"
+    bgcolor="#E8F8E8">
+
+
+<br>
+
+
+<font color="#008000" size="8">
+    ✓
+</font>
+
+
+<br><br>
+
+
+<font color="#008000" size="6">
+    <b>LOGIN SUCCESSFUL</b>
+</font>
+
+
+<br><br>
+
+
+<font color="#0000FF" size="4">
+    <b>Welcome to Think &amp; Learn!</b>
+</font>
+
+
+<br><br>
+
+
+<hr width="70%"
+    color="#008000">
+
+
+<br>
+
+
+<font color="#555555" size="3">
+
+    You have successfully logged in<br>
+    to the Think &amp; Learn Employee Portal.
+
+</font>
+
+
+<br><br>
+
+
+<table border="1"
+       bordercolor="#FFD700"
+       bgcolor="#FFF2CC"
+       cellpadding="10">
+
+<tr>
+
+<td>
+
+<font color="#CC9900" size="3">
+    <b>LEARN &bull; GROW &bull; ACHIEVE</b>
+</font>
+
+</td>
+
+</tr>
+
+</table>
+
+
+<br><br><br>
+
+
+<!-- RED BACK BUTTON -->
+
+<button type="button"
+        onclick="showPage('login')"
+        style="background-color:#FF0000;
+               color:white;
+               border:2px solid #990000;
+               padding:10px 30px;
+               font-size:16px;
+               font-weight:bold;">
+
+    BACK TO LOGIN
+
+</button>
+
+
+<br><br>
+
+</td>
+
+</tr>
+
+</table>
+
+
+<br><br>
+
+
+<font color="#555555" size="2">
+
+    © 2026 Think &amp; Learn | Employee Portal
+
+</font>
+
+
+</center>
+
+</div>
+
+
+</body>
+
+</html>

@@ -1,0 +1,1678 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Student Application</title>
+
+    <!-- Bootstrap 5 -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #eef2f7;
+            color: #222;
+        }
+
+        /* ================= HEADER ================= */
+
+        .college-header {
+
+            background: linear-gradient(
+                135deg,
+                #071a35,
+                #123b6d
+            );
+
+            color: white;
+
+            padding: 18px 35px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+        }
+
+        .college-left {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 15px;
+        }
+
+        .logo {
+
+            width: 65px;
+
+            height: 65px;
+
+            border-radius: 50%;
+
+            background: white;
+
+            color: #0b2b52;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            font-size: 22px;
+
+            font-weight: bold;
+        }
+
+        .college-name {
+
+            margin: 0;
+
+            font-size: 26px;
+
+            font-weight: bold;
+        }
+
+        .college-subtitle {
+
+            margin: 4px 0 0;
+
+            font-size: 14px;
+
+            opacity: 0.9;
+        }
+
+        .portal-title {
+
+            text-align: right;
+        }
+
+        .portal-title h5 {
+
+            margin: 0;
+
+            font-weight: bold;
+        }
+
+        .portal-title p {
+
+            margin: 4px 0 0;
+
+            font-size: 13px;
+        }
+
+
+        /* ================= MAIN ================= */
+
+        .main-container {
+
+            max-width: 1200px;
+
+            margin: 35px auto;
+
+            padding: 0 15px;
+        }
+
+
+        /* ================= LEFT PANEL ================= */
+
+        .left-panel {
+
+            height: 100%;
+
+            min-height: 700px;
+
+            background: linear-gradient(
+                160deg,
+                #071a35,
+                #164b80
+            );
+
+            color: white;
+
+            border-radius: 18px;
+
+            padding: 40px 30px;
+
+            display: flex;
+
+            flex-direction: column;
+
+            justify-content: center;
+
+            box-shadow:
+                0 8px 25px
+                rgba(0, 0, 0, 0.15);
+        }
+
+        .left-panel h2 {
+
+            font-size: 30px;
+
+            font-weight: bold;
+
+            margin-bottom: 25px;
+        }
+
+        .quote {
+
+            font-size: 23px;
+
+            font-style: italic;
+
+            line-height: 1.5;
+
+            margin-bottom: 15px;
+        }
+
+        .quote-author {
+
+            font-size: 14px;
+
+            margin-bottom: 35px;
+
+            opacity: 0.8;
+        }
+
+        .feature {
+
+            margin: 15px 0;
+
+            font-size: 16px;
+        }
+
+        .feature span {
+
+            display: inline-block;
+
+            width: 30px;
+
+            height: 30px;
+
+            background: white;
+
+            color: #123b6d;
+
+            border-radius: 50%;
+
+            text-align: center;
+
+            line-height: 30px;
+
+            margin-right: 10px;
+
+            font-weight: bold;
+        }
+
+
+        /* ================= FORM CARD ================= */
+
+        .form-card {
+
+            background: white;
+
+            border-radius: 18px;
+
+            padding: 35px;
+
+            box-shadow:
+                0 8px 25px
+                rgba(0, 0, 0, 0.10);
+        }
+
+
+        /* ================= APPLICATION TITLE ================= */
+
+        .application-title {
+
+            text-align: center;
+
+            color: #071a35;
+
+            font-size: 32px;
+
+            font-weight: bold;
+
+            letter-spacing: 2px;
+
+            margin-bottom: 8px;
+        }
+
+        .application-line {
+
+            width: 80px;
+
+            height: 4px;
+
+            background: #164b80;
+
+            margin: 0 auto 15px;
+
+            border-radius: 10px;
+        }
+
+        .form-description {
+
+            text-align: center;
+
+            color: #666;
+
+            margin-bottom: 25px;
+        }
+
+
+        /* ================= SECTION TITLE ================= */
+
+        .section-title {
+
+            background: #edf4fb;
+
+            color: #0b2b52;
+
+            padding: 10px 15px;
+
+            border-left: 5px solid #123b6d;
+
+            font-weight: bold;
+
+            margin: 25px 0 18px;
+
+            border-radius: 5px;
+        }
+
+
+        /* ================= FORM ================= */
+
+        .form-label {
+
+            font-weight: 600;
+
+            color: #333;
+        }
+
+        .form-control,
+        .form-select {
+
+            padding: 11px;
+
+            border-radius: 8px;
+        }
+
+        .form-control:focus,
+        .form-select:focus {
+
+            border-color: #164b80;
+
+            box-shadow:
+                0 0 0 0.15rem
+                rgba(22, 75, 128, 0.15);
+        }
+
+
+        /* ================= SUBMIT BUTTON ================= */
+
+        .submit-btn {
+
+            width: 100%;
+
+            padding: 13px;
+
+            border: none;
+
+            border-radius: 9px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #071a35,
+                    #164b80
+                );
+
+            color: white;
+
+            font-size: 17px;
+
+            font-weight: bold;
+
+            margin-top: 20px;
+
+            cursor: pointer;
+        }
+
+        .submit-btn:hover {
+
+            opacity: 0.9;
+        }
+
+
+        /* ================= SUCCESS PAGE ================= */
+
+        #successPage {
+
+            display: none;
+
+            text-align: center;
+
+            padding: 50px 20px;
+        }
+
+        .success-icon {
+
+            width: 90px;
+
+            height: 90px;
+
+            border-radius: 50%;
+
+            background: #198754;
+
+            color: white;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 48px;
+
+            margin: 0 auto 20px;
+        }
+
+        .success-title {
+
+            color: #198754;
+
+            font-weight: bold;
+
+            font-size: 30px;
+
+            margin-bottom: 10px;
+        }
+
+        .success-message {
+
+            color: #666;
+
+            margin-bottom: 25px;
+        }
+
+        .application-box {
+
+            background: #f1f7ff;
+
+            border: 1px solid #d7e5f5;
+
+            border-radius: 12px;
+
+            padding: 20px;
+
+            max-width: 550px;
+
+            margin: 25px auto;
+
+            text-align: left;
+        }
+
+        .application-box p {
+
+            margin: 10px 0;
+
+            font-size: 16px;
+        }
+
+        .new-btn {
+
+            background: #123b6d;
+
+            color: white;
+
+            border: none;
+
+            padding: 12px 25px;
+
+            border-radius: 8px;
+
+            cursor: pointer;
+        }
+
+        .new-btn:hover {
+
+            background: #071a35;
+        }
+
+
+        /* ================= FOOTER ================= */
+
+        footer {
+
+            text-align: center;
+
+            background: #071a35;
+
+            color: white;
+
+            padding: 15px;
+
+            margin-top: 30px;
+
+            font-size: 13px;
+        }
+
+
+        /* ================= MOBILE ================= */
+
+        @media (max-width: 768px) {
+
+            .college-header {
+
+                flex-direction: column;
+
+                text-align: center;
+
+                gap: 15px;
+            }
+
+            .college-left {
+
+                flex-direction: column;
+            }
+
+            .portal-title {
+
+                text-align: center;
+            }
+
+            .left-panel {
+
+                min-height: auto;
+
+                margin-bottom: 20px;
+            }
+
+            .form-card {
+
+                padding: 22px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- ================================================= -->
+<!-- HEADER -->
+<!-- ================================================= -->
+
+<header class="college-header">
+
+    <div class="college-left">
+
+        <!-- College Logo -->
+        <div class="logo">
+            PEC
+        </div>
+
+        <div>
+
+            <h1 class="college-name">
+                Prathyusha Engineering College
+            </h1>
+
+            <p class="college-subtitle">
+                Student Application & Academic Portal
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="portal-title">
+
+        <h5>
+            STUDENT PORTAL
+        </h5>
+
+        <p>
+            Online Student Application
+        </p>
+
+    </div>
+
+</header>
+
+
+
+<!-- ================================================= -->
+<!-- MAIN -->
+<!-- ================================================= -->
+
+<div class="container main-container">
+
+    <div class="row g-4">
+
+
+        <!-- ================================================= -->
+        <!-- LEFT SIDE -->
+        <!-- ================================================= -->
+
+        <div class="col-lg-4">
+
+            <div class="left-panel">
+
+
+                <h2>
+                    Welcome, Student!
+                </h2>
+
+
+                <p class="quote">
+
+                    "Education is the most powerful weapon
+                    which you can use to change the world."
+
+                </p>
+
+
+                <p class="quote-author">
+
+                    — Nelson Mandela
+
+                </p>
+
+
+                <div class="feature">
+
+                    <span>✓</span>
+
+                    Simple online application
+
+                </div>
+
+
+                <div class="feature">
+
+                    <span>✓</span>
+
+                    Secure student information
+
+                </div>
+
+
+                <div class="feature">
+
+                    <span>✓</span>
+
+                    Easy application process
+
+                </div>
+
+
+                <div class="feature">
+
+                    <span>✓</span>
+
+                    Professional student portal
+
+                </div>
+
+
+                <div class="feature">
+
+                    <span>✓</span>
+
+                    Quick application submission
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ================================================= -->
+        <!-- RIGHT SIDE -->
+        <!-- ================================================= -->
+
+        <div class="col-lg-8">
+
+
+            <div class="form-card">
+
+
+                <!-- ================================================= -->
+                <!-- APPLICATION FORM -->
+                <!-- ================================================= -->
+
+                <div id="applicationForm">
+
+
+                    <!-- MAIN TITLE -->
+
+                    <h2 class="application-title">
+
+                        APPLICATION
+
+                    </h2>
+
+
+                    <div class="application-line"></div>
+
+
+                    <p class="form-description">
+
+                        Please enter your details carefully
+                        before submitting your application.
+
+                    </p>
+
+
+
+                    <form id="studentForm">
+
+
+                        <!-- ================= PERSONAL INFORMATION ================= -->
+
+                        <div class="section-title">
+
+                            1. Personal Information
+
+                        </div>
+
+
+                        <div class="row">
+
+
+                            <!-- Full Name -->
+
+                            <div class="col-md-6 mb-3">
+
+                                <label class="form-label">
+
+                                    Full Name *
+
+                                </label>
+
+
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    id="studentName"
+                                    placeholder="Enter your full name"
+                                    required
+                                >
+
+                            </div>
+
+
+
+                            <!-- Register Number -->
+
+                            <div class="col-md-6 mb-3">
+
+                                <label class="form-label">
+
+                                    Register No. *
+
+                                </label>
+
+
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    id="registerNo"
+                                    placeholder="Example: 23CSE001"
+                                    required
+                                >
+
+                            </div>
+
+
+
+                            <!-- Date of Birth -->
+
+                            <div class="col-md-6 mb-3">
+
+                                <label class="form-label">
+
+                                    Date of Birth *
+
+                                </label>
+
+
+                                <input
+                                    type="date"
+                                    class="form-control"
+                                    id="dob"
+                                    required
+                                >
+
+                            </div>
+
+
+
+                            <!-- Gender -->
+
+                            <div class="col-md-6 mb-3">
+
+                                <label class="form-label">
+
+                                    Gender *
+
+                                </label>
+
+
+                                <select
+                                    class="form-select"
+                                    id="gender"
+                                    required
+                                >
+
+                                    <option value="">
+
+                                        Select Gender
+
+                                    </option>
+
+
+                                    <option>
+                                        Male
+                                    </option>
+
+
+                                    <option>
+                                        Female
+                                    </option>
+
+
+                                    <option>
+                                        Other
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+
+                        </div>
+
+
+
+                        <!-- ================= CONTACT INFORMATION ================= -->
+
+                        <div class="section-title">
+
+                            2. Contact Information
+
+                        </div>
+
+
+                        <div class="row">
+
+
+                            <!-- Email -->
+
+                            <div class="col-md-6 mb-3">
+
+                                <label class="form-label">
+
+                                    Email Address *
+
+                                </label>
+
+
+                                <input
+                                    type="email"
+                                    class="form-control"
+                                    id="email"
+                                    placeholder="example@gmail.com"
+                                    required
+                                >
+
+                            </div>
+
+
+
+                            <!-- Phone -->
+
+                            <div class="col-md-6 mb-3">
+
+                                <label class="form-label">
+
+                                    Mobile Number *
+
+                                </label>
+
+
+                                <input
+                                    type="tel"
+                                    class="form-control"
+                                    id="phone"
+                                    placeholder="Enter 10 digit mobile number"
+                                    pattern="[0-9]{10}"
+                                    required
+                                >
+
+                            </div>
+
+
+
+                            <!-- Address -->
+
+                            <div class="col-12 mb-3">
+
+                                <label class="form-label">
+
+                                    Address *
+
+                                </label>
+
+
+                                <textarea
+                                    class="form-control"
+                                    id="address"
+                                    rows="3"
+                                    placeholder="Enter your complete address"
+                                    required
+                                ></textarea>
+
+                            </div>
+
+
+                        </div>
+
+
+
+                        <!-- ================= ACADEMIC INFORMATION ================= -->
+
+                        <div class="section-title">
+
+                            3. Academic Information
+
+                        </div>
+
+
+                        <div class="row">
+
+
+                            <!-- Department -->
+
+                            <div class="col-md-6 mb-3">
+
+                                <label class="form-label">
+
+                                    Department *
+
+                                </label>
+
+
+                                <select
+                                    class="form-select"
+                                    id="department"
+                                    required
+                                >
+
+                                    <option value="">
+
+                                        Select Department
+
+                                    </option>
+
+
+                                    <option>
+                                        CSE
+                                    </option>
+
+
+                                    <option>
+                                        CSE - AIML
+                                    </option>
+
+
+                                    <option>
+                                        Information Technology
+                                    </option>
+
+
+                                    <option>
+                                        ECE
+                                    </option>
+
+
+                                    <option>
+                                        EEE
+                                    </option>
+
+
+                                    <option>
+                                        Mechanical Engineering
+                                    </option>
+
+
+                                    <option>
+                                        Civil Engineering
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+
+
+                            <!-- Course -->
+
+                            <div class="col-md-6 mb-3">
+
+                                <label class="form-label">
+
+                                    Course *
+
+                                </label>
+
+
+                                <select
+                                    class="form-select"
+                                    id="course"
+                                    required
+                                >
+
+                                    <option value="">
+
+                                        Select Course
+
+                                    </option>
+
+
+                                    <option>
+                                        B.E
+                                    </option>
+
+
+                                    <option>
+                                        B.Tech
+                                    </option>
+
+
+                                    <option>
+                                        M.E
+                                    </option>
+
+
+                                    <option>
+                                        M.Tech
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+
+
+                            <!-- Current Year -->
+
+                            <div class="col-md-6 mb-3">
+
+                                <label class="form-label">
+
+                                    Current Year *
+
+                                </label>
+
+
+                                <select
+                                    class="form-select"
+                                    id="year"
+                                    required
+                                >
+
+                                    <option value="">
+
+                                        Select Year
+
+                                    </option>
+
+
+                                    <option>
+                                        1st Year
+                                    </option>
+
+
+                                    <option>
+                                        2nd Year
+                                    </option>
+
+
+                                    <option>
+                                        3rd Year
+                                    </option>
+
+
+                                    <option>
+                                        4th Year
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+
+
+                            <!-- Semester -->
+
+                            <div class="col-md-6 mb-3">
+
+                                <label class="form-label">
+
+                                    Semester *
+
+                                </label>
+
+
+                                <select
+                                    class="form-select"
+                                    id="semester"
+                                    required
+                                >
+
+                                    <option value="">
+
+                                        Select Semester
+
+                                    </option>
+
+
+                                    <option>
+                                        Semester 1
+                                    </option>
+
+
+                                    <option>
+                                        Semester 2
+                                    </option>
+
+
+                                    <option>
+                                        Semester 3
+                                    </option>
+
+
+                                    <option>
+                                        Semester 4
+                                    </option>
+
+
+                                    <option>
+                                        Semester 5
+                                    </option>
+
+
+                                    <option>
+                                        Semester 6
+                                    </option>
+
+
+                                    <option>
+                                        Semester 7
+                                    </option>
+
+
+                                    <option>
+                                        Semester 8
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+
+
+                            <!-- 10th Percentage -->
+
+                            <div class="col-md-4 mb-3">
+
+                                <label class="form-label">
+
+                                    10th Percentage
+
+                                </label>
+
+
+                                <input
+                                    type="number"
+                                    class="form-control"
+                                    id="tenth"
+                                    placeholder="Example: 90"
+                                    min="0"
+                                    max="100"
+                                    step="0.01"
+                                >
+
+                            </div>
+
+
+
+                            <!-- 12th Percentage -->
+
+                            <div class="col-md-4 mb-3">
+
+                                <label class="form-label">
+
+                                    12th Percentage
+
+                                </label>
+
+
+                                <input
+                                    type="number"
+                                    class="form-control"
+                                    id="twelfth"
+                                    placeholder="Example: 80"
+                                    min="0"
+                                    max="100"
+                                    step="0.01"
+                                >
+
+                            </div>
+
+
+
+                            <!-- CGPA -->
+
+                            <div class="col-md-4 mb-3">
+
+                                <label class="form-label">
+
+                                    Current CGPA
+
+                                </label>
+
+
+                                <input
+                                    type="number"
+                                    class="form-control"
+                                    id="cgpa"
+                                    placeholder="Example: 8.75"
+                                    min="0"
+                                    max="10"
+                                    step="0.01"
+                                >
+
+                            </div>
+
+
+                        </div>
+
+
+
+                        <!-- ================= OTHER INFORMATION ================= -->
+
+                        <div class="section-title">
+
+                            4. Other Information
+
+                        </div>
+
+
+                        <!-- Skills -->
+
+                        <div class="mb-3">
+
+                            <label class="form-label">
+
+                                Skills
+
+                            </label>
+
+
+                            <input
+                                type="text"
+                                class="form-control"
+                                id="skills"
+                                placeholder="Example: Python, Java, HTML, CSS"
+                            >
+
+                        </div>
+
+
+
+                        <!-- Resume -->
+
+                        <div class="mb-3">
+
+                            <label class="form-label">
+
+                                Upload Resume / Document
+
+                            </label>
+
+
+                            <input
+                                type="file"
+                                class="form-control"
+                                id="resume"
+                                accept=".pdf,.doc,.docx"
+                            >
+
+
+                            <small class="text-muted">
+
+                                Accepted formats:
+                                PDF, DOC, DOCX
+
+                            </small>
+
+                        </div>
+
+
+
+                        <!-- ================= DECLARATION ================= -->
+
+                        <div class="section-title">
+
+                            5. Declaration
+
+                        </div>
+
+
+                        <div class="form-check mb-3">
+
+
+                            <input
+                                class="form-check-input"
+                                type="checkbox"
+                                id="declaration"
+                                required
+                            >
+
+
+                            <label
+                                class="form-check-label"
+                                for="declaration"
+                            >
+
+                                I hereby declare that the information
+                                provided above is true and correct
+                                to the best of my knowledge.
+
+                            </label>
+
+
+                        </div>
+
+
+
+                        <!-- ================= SUBMIT ================= -->
+
+                        <button
+                            type="submit"
+                            class="submit-btn"
+                        >
+
+                            Submit Application
+
+                        </button>
+
+
+                    </form>
+
+
+                </div>
+
+
+
+                <!-- ================================================= -->
+                <!-- SUCCESS PAGE -->
+                <!-- ================================================= -->
+
+                <div id="successPage">
+
+
+                    <div class="success-icon">
+
+                        ✓
+
+                    </div>
+
+
+                    <h2 class="success-title">
+
+                        APPLICATION SUBMITTED SUCCESSFULLY!
+
+                    </h2>
+
+
+                    <p class="success-message">
+
+                        Your application has been submitted
+                        successfully.
+
+                    </p>
+
+
+
+                    <div class="application-box">
+
+
+                        <p>
+
+                            <strong>
+                                Register No.:
+                            </strong>
+
+                            <span id="displayRegisterNo"></span>
+
+                        </p>
+
+
+
+                        <p>
+
+                            <strong>
+                                Student Name:
+                            </strong>
+
+                            <span id="displayName"></span>
+
+                        </p>
+
+
+
+                        <p>
+
+                            <strong>
+                                Email:
+                            </strong>
+
+                            <span id="displayEmail"></span>
+
+                        </p>
+
+
+
+                        <p>
+
+                            <strong>
+                                Department:
+                            </strong>
+
+                            <span id="displayDepartment"></span>
+
+                        </p>
+
+
+
+                        <p>
+
+                            <strong>
+                                Status:
+                            </strong>
+
+                            <span class="badge bg-success">
+
+                                Applied
+
+                            </span>
+
+                        </p>
+
+
+                    </div>
+
+
+
+                    <p>
+
+                        Please keep your Register Number
+                        for future reference.
+
+                    </p>
+
+
+                    <button
+                        class="new-btn"
+                        onclick="newApplication()"
+                    >
+
+                        New Application
+
+                    </button>
+
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- ================================================= -->
+<!-- FOOTER -->
+<!-- ================================================= -->
+
+<footer>
+
+    © 2026 Prathyusha Engineering College |
+    Student Application Portal
+
+</footer>
+
+
+
+<!-- ================================================= -->
+<!-- JAVASCRIPT -->
+<!-- ================================================= -->
+
+<script>
+
+    // Get the application form
+
+    const studentForm =
+        document.getElementById("studentForm");
+
+
+    // When Submit Application is clicked
+
+    studentForm.addEventListener(
+        "submit",
+        function(event) {
+
+            // Prevent page refresh
+
+            event.preventDefault();
+
+
+            // Get student details
+
+            const studentName =
+                document.getElementById(
+                    "studentName"
+                ).value;
+
+
+            const registerNo =
+                document.getElementById(
+                    "registerNo"
+                ).value;
+
+
+            const email =
+                document.getElementById(
+                    "email"
+                ).value;
+
+
+            const department =
+                document.getElementById(
+                    "department"
+                ).value;
+
+
+            // Create application data
+
+            const application = {
+
+                registerNo: registerNo,
+
+                studentName: studentName,
+
+                email: email,
+
+                department: department,
+
+                status: "Applied",
+
+                submittedDate:
+                    new Date().toLocaleDateString()
+
+            };
+
+
+            // Save application in browser
+
+            localStorage.setItem(
+
+                "studentApplication",
+
+                JSON.stringify(application)
+
+            );
+
+
+            // Display Register Number
+
+            document.getElementById(
+                "displayRegisterNo"
+            ).textContent = registerNo;
+
+
+            // Display Student Name
+
+            document.getElementById(
+                "displayName"
+            ).textContent = studentName;
+
+
+            // Display Email
+
+            document.getElementById(
+                "displayEmail"
+            ).textContent = email;
+
+
+            // Display Department
+
+            document.getElementById(
+                "displayDepartment"
+            ).textContent = department;
+
+
+            // Hide application form
+
+            document.getElementById(
+                "applicationForm"
+            ).style.display = "none";
+
+
+            // Show success page
+
+            document.getElementById(
+                "successPage"
+            ).style.display = "block";
+
+
+            // Scroll to top
+
+            window.scrollTo({
+
+                top: 0,
+
+                behavior: "smooth"
+
+            });
+
+        }
+    );
+
+
+    // New Application button
+
+    function newApplication() {
+
+        // Reset form
+
+        document.getElementById(
+            "studentForm"
+        ).reset();
+
+
+        // Show application form
+
+        document.getElementById(
+            "applicationForm"
+        ).style.display = "block";
+
+
+        // Hide success page
+
+        document.getElementById(
+            "successPage"
+        ).style.display = "none";
+
+
+        // Clear saved data
+
+        localStorage.removeItem(
+            "studentApplication"
+        );
+
+
+        // Scroll to top
+
+        window.scrollTo({
+
+            top: 0,
+
+            behavior: "smooth"
+
+        });
+
+    }
+
+</script>
+
+
+</body>
+
+</html>

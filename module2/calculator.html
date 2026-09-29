@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Calculator</title>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #f2f2f2;
+            font-family: Arial, sans-serif;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .calculator {
+            width: 320px;
+            background-color: #222;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0px 5px 20px gray;
+        }
+
+        .display {
+            width: 100%;
+            height: 60px;
+            background-color: white;
+            border: none;
+            border-radius: 8px;
+            margin-bottom: 15px;
+
+            font-size: 28px;
+            text-align: right;
+            padding: 0 10px;
+            box-sizing: border-box;
+        }
+
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+
+        button {
+            height: 60px;
+            font-size: 22px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+
+            background-color: #444;
+            color: white;
+        }
+
+        button:hover {
+            background-color: #666;
+        }
+
+        .operator {
+            background-color: #ff9500;
+        }
+
+        .operator:hover {
+            background-color: #e08500;
+        }
+
+        .clear {
+            background-color: #d9534f;
+        }
+
+        .clear:hover {
+            background-color: #c9302c;
+        }
+
+        .equal {
+            background-color: #28a745;
+        }
+
+        .equal:hover {
+            background-color: #218838;
+        }
+
+        .zero {
+            grid-column: span 2;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="calculator">
+
+        <input type="text" id="display" class="display" readonly>
+
+        <div class="buttons">
+
+            <!-- Row 1 -->
+            <button class="clear" onclick="clearDisplay()">C</button>
+            <button onclick="deleteLast()">⌫</button>
+            <button class="operator" onclick="addToDisplay('(')">(</button>
+            <button class="operator" onclick="addToDisplay(')')">)</button>
+
+            <!-- Row 2 -->
+            <button onclick="addToDisplay('7')">7</button>
+            <button onclick="addToDisplay('8')">8</button>
+            <button onclick="addToDisplay('9')">9</button>
+            <button class="operator" onclick="addToDisplay('/')">÷</button>
+
+            <!-- Row 3 -->
+            <button onclick="addToDisplay('4')">4</button>
+            <button onclick="addToDisplay('5')">5</button>
+            <button onclick="addToDisplay('6')">6</button>
+            <button class="operator" onclick="addToDisplay('*')">×</button>
+
+            <!-- Row 4 -->
+            <button onclick="addToDisplay('1')">1</button>
+            <button onclick="addToDisplay('2')">2</button>
+            <button onclick="addToDisplay('3')">3</button>
+            <button class="operator" onclick="addToDisplay('-')">−</button>
+
+            <!-- Row 5 -->
+            <button class="zero" onclick="addToDisplay('0')">0</button>
+            <button onclick="addToDisplay('.')">.</button>
+            <button class="operator" onclick="addToDisplay('+')">+</button>
+
+            <!-- Row 6 -->
+            <button class="operator" onclick="addPercentage()">%</button>
+            <button class="equal" onclick="calculate()">=</button>
+
+        </div>
+    </div>
+
+
+    <script>
+
+        // Add number or operator
+        function addToDisplay(value) {
+
+            let display = document.getElementById("display");
+
+            display.value += value;
+        }
+
+
+        // Add percentage symbol ONLY
+        function addPercentage() {
+
+            let display = document.getElementById("display");
+
+            // Don't add another % if already present
+            if (!display.value.endsWith("%")) {
+
+                display.value += "%";
+            }
+        }
+
+
+        // Clear display
+        function clearDisplay() {
+
+            document.getElementById("display").value = "";
+        }
+
+
+        // Delete last character
+        function deleteLast() {
+
+            let display = document.getElementById("display");
+
+            display.value = display.value.slice(0, -1);
+        }
+
+
+        // Calculate only when = is pressed
+        function calculate() {
+
+            let display = document.getElementById("display");
+
+            let expression = display.value;
+
+            try {
+
+                /*
+                    Example:
+
+                    20%
+                    becomes
+                    20 / 100
+                */
+
+                expression = expression.replace(
+                    /(\d+(\.\d+)?)%/g,
+                    "($1/100)"
+                );
+
+
+                /*
+                    Example:
+
+                    500+20%
+
+                    becomes
+
+                    500+(20/100)
+
+                    But for normal calculator percentage:
+
+                    500 + 20%
+                    = 600
+
+                    So we handle + and - separately.
+                */
+
+                let percentageMatch = display.value.match(
+                    /^(.+)([+\-])(\d+(\.\d+)?)%$/
+                );
+
+
+                if (percentageMatch) {
+
+                    let firstExpression = percentageMatch[1];
+
+                    let operator = percentageMatch[2];
+
+                    let percentageNumber =
+                        parseFloat(percentageMatch[3]);
+
+
+                    let firstNumber =
+                        eval(firstExpression);
+
+
+                    let percentageValue =
+                        firstNumber * percentageNumber / 100;
+
+
+                    let result;
+
+
+                    if (operator === "+") {
+
+                        result =
+                            firstNumber + percentageValue;
+                    }
+
+                    else {
+
+                        result =
+                            firstNumber - percentageValue;
+                    }
+
+
+                    display.value = result;
+
+                    return;
+                }
+
+
+                /*
+                    Multiplication percentage
+
+                    Example:
+
+                    500*20%
+
+                    = 100
+                */
+
+                let multiplicationMatch = display.value.match(
+                    /^(.+)\*(\d+(\.\d+)?)%$/
+                );
+
+
+                if (multiplicationMatch) {
+
+                    let firstNumber =
+                        eval(multiplicationMatch[1]);
+
+
+                    let percentageNumber =
+                        parseFloat(multiplicationMatch[2]);
+
+
+                    display.value =
+                        firstNumber *
+                        percentageNumber /
+                        100;
+
+                    return;
+                }
+
+
+                /*
+                    Division percentage
+
+                    Example:
+
+                    500/20%
+
+                    = 2500
+                */
+
+                let divisionMatch = display.value.match(
+                    /^(.+)\/(\d+(\.\d+)?)%$/
+                );
+
+
+                if (divisionMatch) {
+
+                    let firstNumber =
+                        eval(divisionMatch[1]);
+
+
+                    let percentageNumber =
+                        parseFloat(divisionMatch[2]);
+
+
+                    display.value =
+                        firstNumber /
+                        (percentageNumber / 100);
+
+                    return;
+                }
+
+
+                /*
+                    Simple percentage
+
+                    Example:
+
+                    20%
+
+                    = 0.2
+                */
+
+                if (display.value.endsWith("%")) {
+
+                    let number =
+                        parseFloat(
+                            display.value.slice(0, -1)
+                        );
+
+
+                    display.value = number / 100;
+
+                    return;
+                }
+
+
+                // Normal calculation
+
+                let result = eval(expression);
+
+
+                if (!isFinite(result)) {
+
+                    display.value = "Error";
+
+                } else {
+
+                    display.value = result;
+                }
+
+            }
+
+            catch (error) {
+
+                display.value = "Error";
+            }
+        }
+
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,3849 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Eventify - Event Management</title>
+
+<style>
+
+/* =========================================================
+   RESET
+========================================================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+body{
+    color:#222;
+
+    /* SAME EVENT BACKGROUND FOR ALL PAGES */
+    background-image:
+        linear-gradient(
+            rgba(255,255,255,0.78),
+            rgba(255,255,255,0.78)
+        ),
+        url("https://images.unsplash.com/photo-1519167758481-83f550bb49b3?auto=format&fit=crop&w=2000&q=90");
+
+    background-size:cover;
+    background-position:center;
+    background-attachment:fixed;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+header{
+    background:rgba(17,24,39,0.96);
+    color:white;
+    padding:18px 5%;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    position:sticky;
+    top:0;
+    z-index:1000;
+}
+
+.logo{
+    font-size:28px;
+    font-weight:bold;
+    color:#f59e0b;
+}
+
+nav{
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+}
+
+nav button{
+    background:transparent;
+    border:none;
+    color:white;
+    padding:9px 13px;
+    cursor:pointer;
+    border-radius:6px;
+    font-size:14px;
+}
+
+nav button:hover{
+    background:#374151;
+}
+
+
+/* =========================================================
+   PAGE
+========================================================= */
+
+.page{
+    display:none;
+    min-height:85vh;
+    padding:40px 6%;
+}
+
+.page.active{
+    display:block;
+}
+
+
+/* =========================================================
+   COMMON
+========================================================= */
+
+.page-title{
+    text-align:center;
+    margin-bottom:30px;
+}
+
+.page-title h1{
+    font-size:34px;
+    color:#111827;
+    margin-bottom:10px;
+}
+
+.page-title p{
+    color:#4b5563;
+}
+
+.card,
+.registration-box,
+.payment-box,
+.review-box,
+.profile-box{
+    background:rgba(255,255,255,0.95);
+    border-radius:15px;
+    padding:25px;
+    box-shadow:0 8px 30px rgba(0,0,0,0.12);
+}
+
+.btn{
+    border:none;
+    padding:12px 20px;
+    border-radius:8px;
+    cursor:pointer;
+    font-size:15px;
+    font-weight:bold;
+}
+
+.btn-primary{
+    background:#f59e0b;
+    color:#111827;
+}
+
+.btn-primary:hover{
+    background:#d97706;
+    color:white;
+}
+
+.btn-dark{
+    background:#111827;
+    color:white;
+}
+
+.btn-dark:hover{
+    background:#374151;
+}
+
+.btn-green{
+    background:#16a34a;
+    color:white;
+}
+
+.btn-green:hover{
+    background:#15803d;
+}
+
+.btn-blue{
+    background:#2563eb;
+    color:white;
+}
+
+.btn-blue:hover{
+    background:#1d4ed8;
+}
+
+
+/* =========================================================
+   REGISTRATION
+========================================================= */
+
+.registration-container{
+    max-width:1050px;
+    margin:auto;
+}
+
+.registration-box{
+    padding:35px;
+}
+
+.event-selection{
+    display:grid;
+    grid-template-columns:repeat(6,1fr);
+    gap:10px;
+    margin-bottom:30px;
+}
+
+.event-choice{
+    background:#f9fafb;
+    border:2px solid #e5e7eb;
+    padding:15px 8px;
+    border-radius:10px;
+    text-align:center;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.event-choice:hover{
+    border-color:#f59e0b;
+}
+
+.event-choice.selected{
+    border-color:#f59e0b;
+    background:#fffbeb;
+}
+
+.event-choice span{
+    display:block;
+    font-size:28px;
+    margin-bottom:5px;
+}
+
+.form-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+}
+
+.form-group{
+    display:flex;
+    flex-direction:column;
+}
+
+.form-group.full{
+    grid-column:1/-1;
+}
+
+.form-group label{
+    font-weight:bold;
+    margin-bottom:7px;
+    color:#374151;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea{
+    padding:12px;
+    border:1px solid #d1d5db;
+    border-radius:8px;
+    outline:none;
+    font-size:15px;
+    background:white;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus{
+    border-color:#f59e0b;
+}
+
+.form-group textarea{
+    min-height:100px;
+    resize:vertical;
+}
+
+.form-section{
+    margin-top:25px;
+    margin-bottom:15px;
+    padding-bottom:8px;
+    border-bottom:2px solid #f59e0b;
+}
+
+.form-section h3{
+    color:#111827;
+}
+
+.submit-area{
+    text-align:center;
+    margin-top:25px;
+}
+
+
+/* =========================================================
+   CATEGORY
+========================================================= */
+
+.category-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:20px;
+}
+
+.category-card{
+    background:rgba(255,255,255,0.95);
+    padding:30px 20px;
+    border-radius:15px;
+    text-align:center;
+    cursor:pointer;
+    box-shadow:0 5px 18px rgba(0,0,0,0.10);
+    transition:0.3s;
+}
+
+.category-card:hover{
+    transform:translateY(-6px);
+}
+
+.category-icon{
+    font-size:50px;
+    margin-bottom:15px;
+}
+
+.category-card h3{
+    margin-bottom:8px;
+}
+
+
+/* =========================================================
+   SEARCH
+========================================================= */
+
+.search-box{
+    max-width:1000px;
+    margin:auto;
+}
+
+.search-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+}
+
+.search-buttons{
+    grid-column:1/-1;
+    text-align:center;
+    margin-top:10px;
+}
+
+
+/* =========================================================
+   VENUES
+========================================================= */
+
+.venue-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:25px;
+}
+
+.venue-card{
+    background:rgba(255,255,255,0.96);
+    border-radius:15px;
+    overflow:hidden;
+    box-shadow:0 5px 20px rgba(0,0,0,0.10);
+}
+
+.venue-card img{
+    width:100%;
+    height:200px;
+    object-fit:cover;
+}
+
+.venue-content{
+    padding:20px;
+}
+
+.venue-content h3{
+    margin-bottom:8px;
+    color:#111827;
+}
+
+.rating{
+    color:#f59e0b;
+    font-weight:bold;
+    margin-bottom:8px;
+}
+
+.venue-info{
+    margin:8px 0;
+    color:#4b5563;
+    line-height:1.6;
+}
+
+.facilities{
+    display:flex;
+    flex-wrap:wrap;
+    gap:6px;
+    margin:12px 0;
+}
+
+.facility{
+    background:#f3f4f6;
+    padding:5px 9px;
+    border-radius:15px;
+    font-size:12px;
+}
+
+.price{
+    font-size:20px;
+    font-weight:bold;
+    color:#16a34a;
+    margin:12px 0;
+}
+
+.venue-buttons{
+    display:flex;
+    gap:8px;
+}
+
+
+/* =========================================================
+   PLAN
+========================================================= */
+
+.plan-container{
+    max-width:1000px;
+    margin:auto;
+}
+
+.plan-header{
+    background:#111827;
+    color:white;
+    padding:25px;
+    border-radius:15px 15px 0 0;
+}
+
+.plan-header h2{
+    color:#f59e0b;
+}
+
+.plan-table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:20px;
+}
+
+.plan-table th,
+.plan-table td{
+    padding:14px;
+    border-bottom:1px solid #e5e7eb;
+    text-align:left;
+}
+
+.plan-table th{
+    background:#f9fafb;
+}
+
+.total-row{
+    font-size:22px;
+    font-weight:bold;
+    color:#16a34a;
+}
+
+.plan-buttons{
+    display:flex;
+    justify-content:center;
+    gap:15px;
+    margin-top:25px;
+}
+
+
+/* =========================================================
+   MODIFY
+========================================================= */
+
+.modify-container{
+    max-width:1000px;
+    margin:auto;
+}
+
+.modify-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+}
+
+.modify-summary{
+    margin-top:25px;
+    background:#f9fafb;
+    padding:20px;
+    border-radius:12px;
+}
+
+.modify-summary p{
+    padding:6px 0;
+}
+
+.live-total{
+    font-size:28px;
+    font-weight:bold;
+    color:#16a34a;
+    margin-top:10px;
+}
+
+.modify-buttons{
+    text-align:center;
+    margin-top:25px;
+}
+
+
+/* =========================================================
+   BOOKING
+========================================================= */
+
+.booking-container{
+    max-width:800px;
+    margin:auto;
+}
+
+.booking-success{
+    text-align:center;
+    background:rgba(255,255,255,0.96);
+    padding:40px;
+    border-radius:18px;
+    box-shadow:0 8px 25px rgba(0,0,0,0.1);
+}
+
+.success-icon{
+    font-size:70px;
+    margin-bottom:15px;
+}
+
+.booking-number{
+    font-size:24px;
+    font-weight:bold;
+    color:#2563eb;
+    margin:15px 0;
+}
+
+.booking-details{
+    text-align:left;
+    margin-top:25px;
+}
+
+.booking-details p{
+    padding:10px;
+    border-bottom:1px solid #e5e7eb;
+}
+
+
+/* =========================================================
+   PAYMENT
+========================================================= */
+
+.payment-container{
+    max-width:850px;
+    margin:auto;
+}
+
+.payment-box{
+    padding:35px;
+}
+
+.payment-header{
+    text-align:center;
+    margin-bottom:30px;
+}
+
+.payment-amount{
+    background:#111827;
+    color:white;
+    padding:25px;
+    border-radius:12px;
+    text-align:center;
+    margin-bottom:25px;
+}
+
+.payment-amount span{
+    display:block;
+    font-size:15px;
+    color:#d1d5db;
+    margin-bottom:8px;
+}
+
+.payment-amount strong{
+    font-size:35px;
+    color:#f59e0b;
+}
+
+.payment-methods{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:15px;
+    margin-bottom:25px;
+}
+
+.payment-method{
+    border:2px solid #e5e7eb;
+    padding:18px;
+    border-radius:10px;
+    text-align:center;
+    cursor:pointer;
+}
+
+.payment-method.selected{
+    border-color:#f59e0b;
+    background:#fffbeb;
+}
+
+.payment-details{
+    display:none;
+    margin-top:20px;
+}
+
+.payment-details.active{
+    display:block;
+}
+
+.payment-buttons{
+    text-align:center;
+    margin-top:25px;
+}
+
+
+/* =========================================================
+   SUCCESS
+========================================================= */
+
+.payment-success{
+    max-width:700px;
+    margin:auto;
+    text-align:center;
+    background:rgba(255,255,255,0.96);
+    padding:50px 30px;
+    border-radius:18px;
+    box-shadow:0 8px 25px rgba(0,0,0,0.1);
+}
+
+.transaction-id{
+    background:#f3f4f6;
+    padding:15px;
+    border-radius:8px;
+    margin:20px 0;
+    font-weight:bold;
+}
+
+
+/* =========================================================
+   REVIEW
+========================================================= */
+
+.review-container{
+    max-width:700px;
+    margin:auto;
+}
+
+.stars{
+    display:flex;
+    gap:8px;
+    margin:10px 0;
+}
+
+.stars span{
+    font-size:30px;
+    cursor:pointer;
+}
+
+
+/* =========================================================
+   PROFILE
+========================================================= */
+
+.profile-container{
+    max-width:800px;
+    margin:auto;
+}
+
+.profile-row{
+    display:flex;
+    justify-content:space-between;
+    padding:14px;
+    border-bottom:1px solid #e5e7eb;
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+footer{
+    background:rgba(17,24,39,0.97);
+    color:white;
+    text-align:center;
+    padding:25px;
+    margin-top:30px;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media(max-width:950px){
+
+    .event-selection{
+        grid-template-columns:repeat(3,1fr);
+    }
+
+    .category-grid{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .venue-grid{
+        grid-template-columns:1fr 1fr;
+    }
+
+}
+
+@media(max-width:650px){
+
+    header{
+        flex-direction:column;
+        gap:15px;
+    }
+
+    .form-grid,
+    .search-grid,
+    .modify-grid{
+        grid-template-columns:1fr;
+    }
+
+    .event-selection,
+    .category-grid,
+    .venue-grid,
+    .payment-methods{
+        grid-template-columns:1fr;
+    }
+
+    .venue-buttons,
+    .plan-buttons{
+        flex-direction:column;
+    }
+
+    .page{
+        padding:25px 4%;
+    }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- =========================================================
+     HEADER
+========================================================= -->
+
+<header>
+
+    <div class="logo">
+        EVENTIFY
+    </div>
+
+    <nav>
+
+        <button onclick="showPage('register')">
+            Registration
+        </button>
+
+        <button onclick="showPage('categories')">
+            Categories
+        </button>
+
+        <button onclick="showPage('plan')">
+            My Plan
+        </button>
+
+        <button onclick="showPage('bookings')">
+            Booking
+        </button>
+
+        <button onclick="openPayment()">
+            Payment
+        </button>
+
+        <button onclick="showPage('reviews')">
+            Reviews
+        </button>
+
+        <button onclick="showPage('profile')">
+            Profile
+        </button>
+
+    </nav>
+
+</header>
+
+
+<!-- =========================================================
+     REGISTRATION
+========================================================= -->
+
+<section id="register" class="page active">
+
+<div class="registration-container">
+
+<div class="page-title">
+
+<h1>Event Registration</h1>
+
+<p>
+Choose your event type and provide the required details.
+</p>
+
+</div>
+
+
+<div class="registration-box">
+
+
+<!-- EVENT TYPE -->
+
+<div class="form-section">
+
+<h3>1. Select Event Type</h3>
+
+</div>
+
+
+<div class="event-selection">
+
+<div class="event-choice"
+onclick="changeEventType('Wedding',this)">
+
+<span>💍</span>
+Wedding
+
+</div>
+
+
+<div class="event-choice"
+onclick="changeEventType('Cultural',this)">
+
+<span>🎭</span>
+Cultural
+
+</div>
+
+
+<div class="event-choice"
+onclick="changeEventType('College',this)">
+
+<span>🎓</span>
+College
+
+</div>
+
+
+<div class="event-choice"
+onclick="changeEventType('Birthday',this)">
+
+<span>🎂</span>
+Birthday
+
+</div>
+
+
+<div class="event-choice"
+onclick="changeEventType('Corporate',this)">
+
+<span>💼</span>
+Corporate
+
+</div>
+
+
+<div class="event-choice"
+onclick="changeEventType('Reception',this)">
+
+<span>🎉</span>
+Reception
+
+</div>
+
+</div>
+
+
+<form onsubmit="registerUser();return false;">
+
+<input
+type="hidden"
+id="eventType"
+value=""
+>
+
+
+<!-- DYNAMIC REGISTRATION -->
+
+<div id="dynamicRegistration">
+
+<p style="text-align:center;color:#6b7280;">
+Please select an event type above.
+</p>
+
+</div>
+
+
+<div class="submit-area">
+
+<button
+type="submit"
+class="btn btn-primary"
+>
+
+Continue to Categories →
+
+</button>
+
+</div>
+
+</form>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =========================================================
+     CATEGORIES
+========================================================= -->
+
+<section id="categories" class="page">
+
+<div class="page-title">
+
+<h1>Choose Event Category</h1>
+
+<p>
+Select the type of event you want to organize.
+</p>
+
+</div>
+
+
+<div class="category-grid">
+
+<div class="category-card"
+onclick="selectCategory('Wedding')">
+
+<div class="category-icon">💍</div>
+
+<h3>Wedding</h3>
+
+<p>
+Marriage halls, catering, decoration and more.
+</p>
+
+</div>
+
+
+<div class="category-card"
+onclick="selectCategory('Cultural')">
+
+<div class="category-icon">🎭</div>
+
+<h3>Cultural Events</h3>
+
+<p>
+Auditoriums and cultural programs.
+</p>
+
+</div>
+
+
+<div class="category-card"
+onclick="selectCategory('College')">
+
+<div class="category-icon">🎓</div>
+
+<h3>College Events</h3>
+
+<p>
+College functions and student events.
+</p>
+
+</div>
+
+
+<div class="category-card"
+onclick="selectCategory('Birthday')">
+
+<div class="category-icon">🎂</div>
+
+<h3>Birthday</h3>
+
+<p>
+Birthday parties and celebrations.
+</p>
+
+</div>
+
+
+<div class="category-card"
+onclick="selectCategory('Corporate')">
+
+<div class="category-icon">💼</div>
+
+<h3>Corporate</h3>
+
+<p>
+Meetings and conferences.
+</p>
+
+</div>
+
+
+<div class="category-card"
+onclick="selectCategory('Reception')">
+
+<div class="category-icon">🎉</div>
+
+<h3>Reception</h3>
+
+<p>
+Reception and celebration arrangements.
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =========================================================
+     SEARCH
+========================================================= -->
+
+<section id="search" class="page">
+
+<div class="page-title">
+
+<h1>Search Event Venues</h1>
+
+<p>
+Find suitable venues according to your requirements.
+</p>
+
+</div>
+
+
+<div class="search-box card">
+
+<div class="search-grid">
+
+
+<div class="form-group">
+
+<label>Event Type</label>
+
+<select id="searchEvent">
+
+<option>Wedding</option>
+<option>Cultural</option>
+<option>College</option>
+<option>Birthday</option>
+<option>Corporate</option>
+<option>Reception</option>
+
+</select>
+
+</div>
+
+
+<div class="form-group">
+
+<label>District</label>
+
+<select id="searchDistrict">
+
+<option>Chennai</option>
+<option>Tiruvallur</option>
+<option>Kanchipuram</option>
+<option>Chengalpattu</option>
+<option>Vellore</option>
+<option>Coimbatore</option>
+<option>Madurai</option>
+<option>Trichy</option>
+
+</select>
+
+</div>
+
+
+<div class="form-group">
+
+<label>Preferred Location</label>
+
+<input
+type="text"
+id="searchLocation"
+placeholder="Enter location"
+>
+
+</div>
+
+
+<div class="form-group">
+
+<label>Maximum Venue Budget</label>
+
+<input
+type="number"
+id="searchBudget"
+value="1000000"
+>
+
+</div>
+
+
+<div class="search-buttons">
+
+<button
+class="btn btn-primary"
+onclick="searchVenues()"
+>
+
+🔎 Search Venue
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =========================================================
+     VENUES
+========================================================= -->
+
+<section id="venues" class="page">
+
+<div class="page-title">
+
+<h1>Available Venues</h1>
+
+<p>
+Choose a venue for your event.
+</p>
+
+</div>
+
+
+<div
+id="venueList"
+class="venue-grid"
+></div>
+
+</section>
+
+
+<!-- =========================================================
+     PLAN
+========================================================= -->
+
+<section id="plan" class="page">
+
+<div class="plan-container card">
+
+<div class="plan-header">
+
+<h2>My Event Plan</h2>
+
+<p>
+Your selected venue and event services.
+</p>
+
+</div>
+
+
+<table class="plan-table">
+
+<tr>
+<th>Customer</th>
+<td id="planCustomer">-</td>
+</tr>
+
+<tr>
+<th>Event</th>
+<td id="planEvent">-</td>
+</tr>
+
+<tr>
+<th>District</th>
+<td id="planDistrict">-</td>
+</tr>
+
+<tr>
+<th>Event Date</th>
+<td id="planDate">-</td>
+</tr>
+
+<tr>
+<th>Guests</th>
+<td id="planGuests">-</td>
+</tr>
+
+<tr>
+<th>Venue</th>
+<td id="planVenue">Not selected</td>
+</tr>
+
+<tr>
+<th>Venue Rental</th>
+<td id="planVenuePrice">₹0</td>
+</tr>
+
+<tr>
+<th>Catering</th>
+<td id="planCatering">₹0</td>
+</tr>
+
+<tr>
+<th>Decoration</th>
+<td id="planDecoration">₹0</td>
+</tr>
+
+<tr>
+<th>Photography</th>
+<td id="planPhotography">₹0</td>
+</tr>
+
+<tr>
+<th>DJ & Sound</th>
+<td id="planDJ">₹0</td>
+</tr>
+
+<tr>
+<th>Stage</th>
+<td id="planStage">₹0</td>
+</tr>
+
+<tr>
+<th>LED Screen</th>
+<td id="planLED">₹0</td>
+</tr>
+
+<tr>
+<th>Security</th>
+<td id="planSecurity">₹0</td>
+</tr>
+
+<tr>
+<th>Additional Requirements</th>
+<td id="planRequirements">None</td>
+</tr>
+
+<tr class="total-row">
+<th>Total</th>
+<td id="planTotal">₹0</td>
+</tr>
+
+</table>
+
+
+<div class="plan-buttons">
+
+<button
+class="btn btn-blue"
+onclick="openModifyPlan()"
+>
+✏ Modify Plan
+</button>
+
+<button
+class="btn btn-green"
+onclick="acceptPlan()"
+>
+✓ Accept Plan
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =========================================================
+     MODIFY
+========================================================= -->
+
+<section id="modify" class="page">
+
+<div class="modify-container">
+
+<div class="page-title">
+
+<h1>Modify Your Event Plan</h1>
+
+<p>
+Change services and your total will update automatically.
+</p>
+
+</div>
+
+
+<div class="card">
+
+<div class="modify-grid">
+
+
+<div class="form-group">
+
+<label>Number of Guests</label>
+
+<input
+type="number"
+id="modifyGuests"
+oninput="calculateModifiedPlan()"
+>
+
+</div>
+
+
+<div class="form-group">
+
+<label>Food Preference</label>
+
+<select
+id="modifyFood"
+onchange="calculateModifiedPlan()"
+>
+
+<option value="450">
+Vegetarian - ₹450/person
+</option>
+
+<option value="550">
+Non-Vegetarian - ₹550/person
+</option>
+
+<option value="500">
+Both - ₹500/person
+</option>
+
+</select>
+
+</div>
+
+
+<div class="form-group">
+
+<label>Decoration</label>
+
+<select
+id="modifyDecoration"
+onchange="calculateModifiedPlan()"
+>
+
+<option value="0">No Decoration - ₹0</option>
+<option value="25000">Basic - ₹25,000</option>
+<option value="50000">Premium - ₹50,000</option>
+<option value="80000">Luxury - ₹80,000</option>
+
+</select>
+
+</div>
+
+
+<div class="form-group">
+
+<label>Photography</label>
+
+<select
+id="modifyPhotography"
+onchange="calculateModifiedPlan()"
+>
+
+<option value="0">No Photography - ₹0</option>
+<option value="30000">Basic - ₹30,000</option>
+<option value="60000">Premium - ₹60,000</option>
+<option value="90000">Photography + Video - ₹90,000</option>
+
+</select>
+
+</div>
+
+
+<div class="form-group">
+
+<label>DJ & Sound</label>
+
+<select
+id="modifyDJ"
+onchange="calculateModifiedPlan()"
+>
+
+<option value="0">No DJ - ₹0</option>
+<option value="15000">Basic Sound - ₹15,000</option>
+<option value="30000">DJ + Sound - ₹30,000</option>
+<option value="50000">Premium DJ + Sound - ₹50,000</option>
+
+</select>
+
+</div>
+
+
+<div class="form-group">
+
+<label>Stage</label>
+
+<select
+id="modifyStage"
+onchange="calculateModifiedPlan()"
+>
+
+<option value="0">No Stage - ₹0</option>
+<option value="20000">Basic - ₹20,000</option>
+<option value="40000">Premium - ₹40,000</option>
+<option value="70000">Grand - ₹70,000</option>
+
+</select>
+
+</div>
+
+
+<div class="form-group">
+
+<label>LED Screen</label>
+
+<select
+id="modifyLED"
+onchange="calculateModifiedPlan()"
+>
+
+<option value="0">No LED - ₹0</option>
+<option value="20000">Basic - ₹20,000</option>
+<option value="40000">Large - ₹40,000</option>
+<option value="60000">Premium LED Wall - ₹60,000</option>
+
+</select>
+
+</div>
+
+
+<div class="form-group">
+
+<label>Security</label>
+
+<select
+id="modifySecurity"
+onchange="calculateModifiedPlan()"
+>
+
+<option value="0">No Security - ₹0</option>
+<option value="10000">Basic - ₹10,000</option>
+<option value="25000">Premium - ₹25,000</option>
+
+</select>
+
+</div>
+
+
+<div class="form-group full">
+
+<label>Additional Requirements</label>
+
+<textarea
+id="modifyRequirements"
+oninput="calculateModifiedPlan()"
+></textarea>
+
+</div>
+
+</div>
+
+
+<div class="modify-summary">
+
+<h3>Updated Cost Summary</h3>
+
+<p>
+Venue:
+<strong id="modifyVenue">₹0</strong>
+</p>
+
+<p>
+Catering:
+<strong id="modifyCatering">₹0</strong>
+</p>
+
+<p>
+Decoration:
+<strong id="modifyDecorationPrice">₹0</strong>
+</p>
+
+<p>
+Photography:
+<strong id="modifyPhotographyPrice">₹0</strong>
+</p>
+
+<p>
+DJ & Sound:
+<strong id="modifyDJPrice">₹0</strong>
+</p>
+
+<p>
+Stage:
+<strong id="modifyStagePrice">₹0</strong>
+</p>
+
+<p>
+LED:
+<strong id="modifyLEDPrice">₹0</strong>
+</p>
+
+<p>
+Security:
+<strong id="modifySecurityPrice">₹0</strong>
+</p>
+
+<div class="live-total">
+
+Total:
+<span id="modifiedTotal">
+₹0
+</span>
+
+</div>
+
+</div>
+
+
+<div class="modify-buttons">
+
+<button
+class="btn btn-dark"
+onclick="showPage('plan')"
+>
+← Back to Plan
+</button>
+
+<button
+class="btn btn-primary"
+onclick="saveModifiedPlan()"
+>
+✓ Apply Changes
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =========================================================
+     BOOKING
+========================================================= -->
+
+<section id="bookings" class="page">
+
+<div class="booking-container">
+
+<div class="booking-success">
+
+<div class="success-icon">
+🎉
+</div>
+
+<h1>
+Booking Confirmed
+</h1>
+
+<p>
+Your event plan has been accepted.
+</p>
+
+<div class="booking-number">
+
+Booking ID:
+<span id="bookingId">
+EV000000
+</span>
+
+</div>
+
+
+<div class="booking-details">
+
+<p>
+<strong>Customer:</strong>
+<span id="bookingCustomer">-</span>
+</p>
+
+<p>
+<strong>Event:</strong>
+<span id="bookingEvent">-</span>
+</p>
+
+<p>
+<strong>Date:</strong>
+<span id="bookingDate">-</span>
+</p>
+
+<p>
+<strong>Venue:</strong>
+<span id="bookingVenue">-</span>
+</p>
+
+<p>
+<strong>Guests:</strong>
+<span id="bookingGuests">-</span>
+</p>
+
+<p>
+<strong>Total:</strong>
+<span id="bookingAmount">₹0</span>
+</p>
+
+<p>
+<strong>Payment:</strong>
+<span id="bookingPayment"
+style="color:#dc2626;font-weight:bold;">
+Pending
+</span>
+</p>
+
+</div>
+
+<br>
+
+<button
+class="btn btn-primary"
+onclick="openPayment()"
+>
+💳 Proceed to Payment
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =========================================================
+     PAYMENT
+========================================================= -->
+
+<section id="payment" class="page">
+
+<div class="payment-container">
+
+<div class="page-title">
+
+<h1>Payment</h1>
+
+<p>
+Complete your event booking payment.
+</p>
+
+</div>
+
+
+<div class="payment-box">
+
+<div class="payment-header">
+
+<h2>Event Booking Payment</h2>
+
+<p>Secure Demo Payment Gateway</p>
+
+</div>
+
+
+<div class="payment-amount">
+
+<span>Total Payable Amount</span>
+
+<strong id="paymentAmount">
+₹0
+</strong>
+
+</div>
+
+
+<h3>Select Payment Method</h3>
+
+<br>
+
+
+<div class="payment-methods">
+
+
+<div
+class="payment-method"
+id="upiMethod"
+onclick="selectPaymentMethod('UPI')"
+>
+
+📱 <strong>UPI</strong>
+
+</div>
+
+
+<div
+class="payment-method"
+id="cardMethod"
+onclick="selectPaymentMethod('Card')"
+>
+
+💳 <strong>Card</strong>
+
+</div>
+
+
+<div
+class="payment-method"
+id="netMethod"
+onclick="selectPaymentMethod('Net Banking')"
+>
+
+🏦 <strong>Net Banking</strong>
+
+</div>
+
+</div>
+
+
+<div
+id="upiDetails"
+class="payment-details"
+>
+
+<div class="form-group">
+
+<label>UPI ID</label>
+
+<input
+type="text"
+id="upiId"
+placeholder="example@upi"
+>
+
+</div>
+
+</div>
+
+
+<div
+id="cardDetails"
+class="payment-details"
+>
+
+<div class="form-grid">
+
+<div class="form-group full">
+
+<label>Card Holder Name</label>
+
+<input
+type="text"
+id="cardName"
+>
+
+</div>
+
+<div class="form-group full">
+
+<label>Card Number</label>
+
+<input
+type="text"
+id="cardNumber"
+maxlength="19"
+placeholder="1234 5678 9012 3456"
+>
+
+</div>
+
+<div class="form-group">
+
+<label>Expiry</label>
+
+<input
+type="text"
+id="expiry"
+placeholder="MM/YY"
+maxlength="5"
+>
+
+</div>
+
+<div class="form-group">
+
+<label>CVV</label>
+
+<input
+type="password"
+id="cvv"
+maxlength="3"
+>
+
+</div>
+
+</div>
+
+</div>
+
+
+<div
+id="netDetails"
+class="payment-details"
+>
+
+<div class="form-group">
+
+<label>Select Bank</label>
+
+<select id="bank">
+
+<option value="">
+Select Bank
+</option>
+
+<option>State Bank of India</option>
+<option>HDFC Bank</option>
+<option>ICICI Bank</option>
+<option>Axis Bank</option>
+<option>Indian Bank</option>
+
+</select>
+
+</div>
+
+</div>
+
+
+<div class="payment-buttons">
+
+<button
+class="btn btn-dark"
+onclick="showPage('bookings')"
+>
+← Back
+</button>
+
+<button
+class="btn btn-green"
+onclick="makePayment()"
+>
+💳 Pay Now
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =========================================================
+     PAYMENT SUCCESS
+========================================================= -->
+
+<section id="paymentSuccess" class="page">
+
+<div class="payment-success">
+
+<div class="success-icon">
+✓
+</div>
+
+<h1>
+Payment Successful!
+</h1>
+
+<p>
+Your event booking payment has been completed.
+</p>
+
+
+<div class="transaction-id">
+
+Transaction ID:
+<span id="transactionId">
+-
+</span>
+
+</div>
+
+
+<p>
+Booking ID:
+<strong id="successBookingId">-</strong>
+</p>
+
+<br>
+
+<p>
+Amount Paid:
+<strong
+id="successAmount"
+style="color:#16a34a;"
+>
+₹0
+</strong>
+</p>
+
+<br>
+
+<p>
+Payment Method:
+<strong id="successMethod">-</strong>
+</p>
+
+<br><br>
+
+
+<button
+class="btn btn-primary"
+onclick="showPage('profile')"
+>
+Go to Profile
+</button>
+
+
+<button
+class="btn btn-dark"
+onclick="showPage('reviews')"
+>
+Give Review
+</button>
+
+</div>
+
+</section>
+
+
+<!-- =========================================================
+     REVIEWS
+========================================================= -->
+
+<section id="reviews" class="page">
+
+<div class="review-container">
+
+<div class="page-title">
+
+<h1>Write a Review</h1>
+
+<p>
+Share your event experience.
+</p>
+
+</div>
+
+
+<div class="review-box">
+
+<div class="form-group">
+
+<label>Your Rating</label>
+
+<div class="stars">
+
+<span onclick="setRating(1)">★</span>
+<span onclick="setRating(2)">★</span>
+<span onclick="setRating(3)">★</span>
+<span onclick="setRating(4)">★</span>
+<span onclick="setRating(5)">★</span>
+
+</div>
+
+</div>
+
+
+<div class="form-group">
+
+<label>Review</label>
+
+<textarea
+id="reviewText"
+placeholder="Write your review..."
+></textarea>
+
+</div>
+
+<br>
+
+<button
+class="btn btn-primary"
+onclick="submitReview()"
+>
+Submit Review
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =========================================================
+     PROFILE
+========================================================= -->
+
+<section id="profile" class="page">
+
+<div class="profile-container">
+
+<div class="page-title">
+
+<h1>My Profile</h1>
+
+</div>
+
+
+<div class="card">
+
+<div class="profile-row">
+<strong>Name</strong>
+<span id="profileName">-</span>
+</div>
+
+<div class="profile-row">
+<strong>Email</strong>
+<span id="profileEmail">-</span>
+</div>
+
+<div class="profile-row">
+<strong>Mobile</strong>
+<span id="profileMobile">-</span>
+</div>
+
+<div class="profile-row">
+<strong>Event</strong>
+<span id="profileEvent">-</span>
+</div>
+
+<div class="profile-row">
+<strong>District</strong>
+<span id="profileDistrict">-</span>
+</div>
+
+<div class="profile-row">
+<strong>Location</strong>
+<span id="profileLocation">-</span>
+</div>
+
+<div class="profile-row">
+<strong>Religion</strong>
+<span id="profileReligion">-</span>
+</div>
+
+<div class="profile-row">
+<strong>Caste / Community</strong>
+<span id="profileCaste">-</span>
+</div>
+
+<div class="profile-row">
+<strong>College</strong>
+<span id="profileCollege">-</span>
+</div>
+
+<div class="profile-row">
+<strong>Guests</strong>
+<span id="profileGuests">-</span>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<footer>
+
+<p>
+© 2026 Eventify Event Management
+</p>
+
+<p>
+Plan • Book • Celebrate
+</p>
+
+</footer>
+
+
+<script>
+
+/* =========================================================
+   USER DATA
+========================================================= */
+
+let currentVenue=null;
+
+let selectedPaymentMethod="";
+
+let rating=0;
+
+let user={
+
+name:"",
+email:"",
+mobile:"",
+event:"",
+district:"",
+location:"",
+religion:"",
+caste:"",
+college:"",
+department:"",
+weddingType:"",
+brideName:"",
+groomName:"",
+collegeEventType:"",
+collegeVenue:"",
+guests:500,
+eventDate:"",
+cateringRate:450,
+decoration:25000,
+photography:30000,
+dj:15000,
+stage:0,
+led:0,
+security:0,
+requirements:""
+
+};
+
+
+/* =========================================================
+   PAGE NAVIGATION
+========================================================= */
+
+function showPage(id){
+
+document
+.querySelectorAll(".page")
+.forEach(p=>p.classList.remove("active"));
+
+let page=document.getElementById(id);
+
+if(page){
+
+page.classList.add("active");
+
+window.scrollTo({
+top:0,
+behavior:"smooth"
+});
+
+}
+
+}
+
+
+/* =========================================================
+   DYNAMIC REGISTRATION
+========================================================= */
+
+function changeEventType(type,element){
+
+document.getElementById("eventType").value=type;
+
+document
+.querySelectorAll(".event-choice")
+.forEach(e=>{
+e.classList.remove("selected");
+});
+
+element.classList.add("selected");
+
+let html="";
+
+
+/* ================= WEDDING ================= */
+
+if(type==="Wedding"){
+
+html=`
+
+<div class="form-section">
+<h3>💍 Marriage / Wedding Details</h3>
+</div>
+
+<div class="form-grid">
+
+<div class="form-group">
+<label>Full Name</label>
+<input id="name" required placeholder="Enter your name">
+</div>
+
+<div class="form-group">
+<label>Email</label>
+<input type="email" id="email" required>
+</div>
+
+<div class="form-group">
+<label>Mobile Number</label>
+<input type="tel" id="mobile" required>
+</div>
+
+<div class="form-group">
+<label>Religion</label>
+<select id="religion" required>
+<option value="">Select Religion</option>
+<option>Hindu</option>
+<option>Christian</option>
+<option>Muslim</option>
+<option>Jain</option>
+<option>Buddhist</option>
+<option>Other</option>
+</select>
+</div>
+
+<div class="form-group">
+<label>Caste / Community</label>
+<input id="caste" placeholder="Enter caste/community">
+</div>
+
+<div class="form-group">
+<label>Wedding Type</label>
+<select id="weddingType">
+<option>Traditional Wedding</option>
+<option>Temple Wedding</option>
+<option>Christian Wedding</option>
+<option>Muslim Wedding</option>
+<option>Reception</option>
+</select>
+</div>
+
+<div class="form-group">
+<label>Bride Name</label>
+<input id="brideName">
+</div>
+
+<div class="form-group">
+<label>Groom Name</label>
+<input id="groomName">
+</div>
+
+<div class="form-group">
+<label>District</label>
+<select id="district">
+<option>Chennai</option>
+<option>Tiruvallur</option>
+<option>Kanchipuram</option>
+<option>Chengalpattu</option>
+<option>Vellore</option>
+<option>Coimbatore</option>
+<option>Madurai</option>
+<option>Trichy</option>
+</select>
+</div>
+
+<div class="form-group">
+<label>Preferred Marriage Location</label>
+<input id="location" placeholder="Example: Avadi">
+</div>
+
+<div class="form-group">
+<label>Number of Guests</label>
+<input type="number" id="guests" value="500" min="1">
+</div>
+
+<div class="form-group">
+<label>Marriage Date</label>
+<input type="date" id="eventDate" required>
+</div>
+
+<div class="form-group">
+<label>Food Preference</label>
+<select id="food">
+<option value="450">Vegetarian - ₹450/person</option>
+<option value="550">Non-Vegetarian - ₹550/person</option>
+<option value="500">Both - ₹500/person</option>
+</select>
+</div>
+
+<div class="form-group full">
+<label>Additional Requirements</label>
+<textarea id="requirements"
+placeholder="Decoration, rituals, special arrangements etc."></textarea>
+</div>
+
+</div>
+
+`;
+
+}
+
+
+/* ================= COLLEGE ================= */
+
+else if(type==="College"){
+
+html=`
+
+<div class="form-section">
+<h3>🎓 College Event Details</h3>
+</div>
+
+<div class="form-grid">
+
+<div class="form-group">
+<label>Organizer Name</label>
+<input id="name" required>
+</div>
+
+<div class="form-group">
+<label>Email</label>
+<input type="email" id="email" required>
+</div>
+
+<div class="form-group">
+<label>Mobile Number</label>
+<input type="tel" id="mobile" required>
+</div>
+
+<div class="form-group">
+<label>College Name</label>
+<select id="college" required>
+<option value="">Select College</option>
+<option>Prathyusha Engineering College</option>
+<option>Rajalakshmi Engineering College</option>
+<option>Saveetha Engineering College</option>
+<option>Sathyabama Institute of Science and Technology</option>
+<option>Vel Tech University</option>
+<option>SRM University</option>
+<option>VIT University</option>
+<option>PSG College</option>
+<option>Other College</option>
+</select>
+</div>
+
+<div class="form-group">
+<label>Department</label>
+<input id="department"
+placeholder="Example: CSE / AIML / ECE">
+</div>
+
+<div class="form-group">
+<label>College Event Type</label>
+<select id="collegeEventType">
+<option>College Cultural Event</option>
+<option>Symposium</option>
+<option>Technical Fest</option>
+<option>Annual Day</option>
+<option>Farewell</option>
+<option>Freshers Day</option>
+<option>Graduation Day</option>
+</select>
+</div>
+
+<div class="form-group">
+<label>Preferred Venue / Auditorium</label>
+<input id="collegeVenue"
+placeholder="Auditorium / Seminar Hall">
+</div>
+
+<div class="form-group">
+<label>District</label>
+<select id="district">
+<option>Chennai</option>
+<option>Tiruvallur</option>
+<option>Kanchipuram</option>
+<option>Chengalpattu</option>
+<option>Vellore</option>
+<option>Coimbatore</option>
+<option>Madurai</option>
+<option>Trichy</option>
+</select>
+</div>
+
+<div class="form-group">
+<label>Preferred Location</label>
+<input id="location">
+</div>
+
+<div class="form-group">
+<label>Number of Students / Guests</label>
+<input type="number" id="guests" value="500" min="1">
+</div>
+
+<div class="form-group">
+<label>Event Date</label>
+<input type="date" id="eventDate" required>
+</div>
+
+<div class="form-group">
+<label>Food Preference</label>
+<select id="food">
+<option value="450">Vegetarian - ₹450/person</option>
+<option value="550">Non-Vegetarian - ₹550/person</option>
+<option value="500">Both - ₹500/person</option>
+</select>
+</div>
+
+<div class="form-group full">
+<label>Additional Requirements</label>
+<textarea id="requirements"
+placeholder="Projector, LED, stage, sound, certificates etc."></textarea>
+</div>
+
+</div>
+
+`;
+
+}
+
+
+/* ================= CULTURAL ================= */
+
+else if(type==="Cultural"){
+
+html=`
+
+<div class="form-section">
+<h3>🎭 Cultural Event Details</h3>
+</div>
+
+<div class="form-grid">
+
+<div class="form-group">
+<label>Organizer Name</label>
+<input id="name" required>
+</div>
+
+<div class="form-group">
+<label>Email</label>
+<input type="email" id="email" required>
+</div>
+
+<div class="form-group">
+<label>Mobile Number</label>
+<input type="tel" id="mobile" required>
+</div>
+
+<div class="form-group">
+<label>Cultural Event Type</label>
+<select id="collegeEventType">
+<option>Dance Program</option>
+<option>Music Program</option>
+<option>Drama</option>
+<option>Festival</option>
+<option>Competition</option>
+<option>Traditional Event</option>
+</select>
+</div>
+
+<div class="form-group">
+<label>Preferred Auditorium / Venue</label>
+<input id="collegeVenue">
+</div>
+
+<div class="form-group">
+<label>District</label>
+<select id="district">
+<option>Chennai</option>
+<option>Tiruvallur</option>
+<option>Kanchipuram</option>
+<option>Chengalpattu</option>
+<option>Vellore</option>
+<option>Coimbatore</option>
+<option>Madurai</option>
+<option>Trichy</option>
+</select>
+</div>
+
+<div class="form-group">
+<label>Location</label>
+<input id="location">
+</div>
+
+<div class="form-group">
+<label>Number of Guests</label>
+<input type="number" id="guests" value="500">
+</div>
+
+<div class="form-group">
+<label>Event Date</label>
+<input type="date" id="eventDate" required>
+</div>
+
+<div class="form-group">
+<label>Food Preference</label>
+<select id="food">
+<option value="450">Vegetarian</option>
+<option value="550">Non-Vegetarian</option>
+<option value="500">Both</option>
+</select>
+</div>
+
+<div class="form-group full">
+<label>Additional Requirements</label>
+<textarea id="requirements"></textarea>
+</div>
+
+</div>
+
+`;
+
+}
+
+
+/* ================= BIRTHDAY ================= */
+
+else if(type==="Birthday"){
+
+html=`
+
+<div class="form-section">
+<h3>🎂 Birthday Party Details</h3>
+</div>
+
+<div class="form-grid">
+
+<div class="form-group">
+<label>Full Name</label>
+<input id="name" required>
+</div>
+
+<div class="form-group">
+<label>Email</label>
+<input type="email" id="email" required>
+</div>
+
+<div class="form-group">
+<label>Mobile</label>
+<input id="mobile" required>
+</div>
+
+<div class="form-group">
+<label>Birthday Person Name</label>
+<input id="collegeVenue">
+</div>
+
+<div class="form-group">
+<label>Party Theme</label>
+<select id="collegeEventType">
+<option>Kids Theme</option>
+<option>Elegant</option>
+<option>Cartoon</option>
+<option>Music Theme</option>
+<option>Custom Theme</option>
+</select>
+</div>
+
+<div class="form-group">
+<label>District</label>
+<select id="district">
+<option>Chennai</option>
+<option>Tiruvallur</option>
+<option>Kanchipuram</option>
+<option>Chengalpattu</option>
+<option>Vellore</option>
+<option>Coimbatore</option>
+<option>Madurai</option>
+<option>Trichy</option>
+</select>
+</div>
+
+<div class="form-group">
+<label>Preferred Location</label>
+<input id="location">
+</div>
+
+<div class="form-group">
+<label>Guests</label>
+<input type="number" id="guests" value="100">
+</div>
+
+<div class="form-group">
+<label>Party Date</label>
+<input type="date" id="eventDate" required>
+</div>
+
+<div class="form-group">
+<label>Food</label>
+<select id="food">
+<option value="450">Vegetarian</option>
+<option value="550">Non-Vegetarian</option>
+<option value="500">Both</option>
+</select>
+</div>
+
+<div class="form-group full">
+<label>Additional Requirements</label>
+<textarea id="requirements"></textarea>
+</div>
+
+</div>
+
+`;
+
+}
+
+
+/* ================= CORPORATE ================= */
+
+else if(type==="Corporate"){
+
+html=`
+
+<div class="form-section">
+<h3>💼 Corporate Event Details</h3>
+</div>
+
+<div class="form-grid">
+
+<div class="form-group">
+<label>Organizer Name</label>
+<input id="name" required>
+</div>
+
+<div class="form-group">
+<label>Company Email</label>
+<input type="email" id="email" required>
+</div>
+
+<div class="form-group">
+<label>Mobile</label>
+<input id="mobile" required>
+</div>
+
+<div class="form-group">
+<label>Company Name</label>
+<input id="college">
+</div>
+
+<div class="form-group">
+<label>Corporate Event Type</label>
+<select id="collegeEventType">
+<option>Conference</option>
+<option>Business Meeting</option>
+<option>Product Launch</option>
+<option>Team Outing</option>
+<option>Annual Meeting</option>
+<option>Training Program</option>
+</select>
+</div>
+
+<div class="form-group">
+<label>Preferred Venue</label>
+<input id="collegeVenue">
+</div>
+
+<div class="form-group">
+<label>District</label>
+<select id="district">
+<option>Chennai</option>
+<option>Tiruvallur</option>
+<option>Kanchipuram</option>
+<option>Chengalpattu</option>
+<option>Vellore</option>
+<option>Coimbatore</option>
+<option>Madurai</option>
+<option>Trichy</option>
+</select>
+</div>
+
+<div class="form-group">
+<label>Location</label>
+<input id="location">
+</div>
+
+<div class="form-group">
+<label>Participants</label>
+<input type="number" id="guests" value="100">
+</div>
+
+<div class="form-group">
+<label>Event Date</label>
+<input type="date" id="eventDate" required>
+</div>
+
+<div class="form-group full">
+<label>Additional Requirements</label>
+<textarea id="requirements"
+placeholder="Projector, conference equipment, lunch, seating etc."></textarea>
+</div>
+
+</div>
+
+`;
+
+}
+
+
+/* ================= RECEPTION ================= */
+
+else if(type==="Reception"){
+
+html=`
+
+<div class="form-section">
+<h3>🎉 Reception Details</h3>
+</div>
+
+<div class="form-grid">
+
+<div class="form-group">
+<label>Full Name</label>
+<input id="name" required>
+</div>
+
+<div class="form-group">
+<label>Email</label>
+<input type="email" id="email" required>
+</div>
+
+<div class="form-group">
+<label>Mobile</label>
+<input id="mobile" required>
+</div>
+
+<div class="form-group">
+<label>Religion</label>
+<select id="religion">
+<option>Hindu</option>
+<option>Christian</option>
+<option>Muslim</option>
+<option>Other</option>
+</select>
+</div>
+
+<div class="form-group">
+<label>Caste / Community</label>
+<input id="caste">
+</div>
+
+<div class="form-group">
+<label>Reception Type</label>
+<select id="weddingType">
+<option>Wedding Reception</option>
+<option>Engagement Reception</option>
+<option>Family Reception</option>
+</select>
+</div>
+
+<div class="form-group">
+<label>District</label>
+<select id="district">
+<option>Chennai</option>
+<option>Tiruvallur</option>
+<option>Kanchipuram</option>
+<option>Chengalpattu</option>
+<option>Vellore</option>
+<option>Coimbatore</option>
+<option>Madurai</option>
+<option>Trichy</option>
+</select>
+</div>
+
+<div class="form-group">
+<label>Preferred Location</label>
+<input id="location">
+</div>
+
+<div class="form-group">
+<label>Guests</label>
+<input type="number" id="guests" value="500">
+</div>
+
+<div class="form-group">
+<label>Reception Date</label>
+<input type="date" id="eventDate" required>
+</div>
+
+<div class="form-group">
+<label>Food Preference</label>
+<select id="food">
+<option value="450">Vegetarian</option>
+<option value="550">Non-Vegetarian</option>
+<option value="500">Both</option>
+</select>
+</div>
+
+<div class="form-group full">
+<label>Additional Requirements</label>
+<textarea id="requirements"></textarea>
+</div>
+
+</div>
+
+`;
+
+}
+
+
+document.getElementById("dynamicRegistration").innerHTML=html;
+
+}
+
+
+/* =========================================================
+   REGISTER USER
+========================================================= */
+
+function registerUser(){
+
+let type=
+document.getElementById("eventType").value;
+
+if(!type){
+
+alert("Please select an event type first.");
+
+return;
+
+}
+
+
+function val(id){
+
+let el=document.getElementById(id);
+
+return el ? el.value : "";
+
+}
+
+
+user.name=val("name");
+user.email=val("email");
+user.mobile=val("mobile");
+user.event=type;
+user.district=val("district");
+user.location=val("location");
+user.religion=val("religion");
+user.caste=val("caste");
+user.college=val("college");
+user.department=val("department");
+user.weddingType=val("weddingType");
+user.brideName=val("brideName");
+user.groomName=val("groomName");
+user.collegeEventType=val("collegeEventType");
+user.collegeVenue=val("collegeVenue");
+
+user.guests=
+parseInt(val("guests")) || 1;
+
+user.eventDate=val("eventDate");
+
+let food=val("food");
+
+if(food){
+user.cateringRate=Number(food);
+}
+
+user.requirements=val("requirements");
+
+
+updateProfile();
+
+updatePlan();
+
+
+alert(
+"Registration completed successfully!"
+);
+
+
+showPage("categories");
+
+}
+
+
+/* =========================================================
+   CATEGORY
+========================================================= */
+
+function selectCategory(category){
+
+document.getElementById("searchEvent").value=category;
+
+document.getElementById("searchDistrict").value=
+user.district;
+
+document.getElementById("searchLocation").value=
+user.location;
+
+searchVenues();
+
+}
+
+
+/* =========================================================
+   SEARCH
+========================================================= */
+
+function searchVenues(){
+
+let event=
+document.getElementById("searchEvent").value;
+
+let district=
+document.getElementById("searchDistrict").value;
+
+let location=
+document.getElementById("searchLocation")
+.value
+.toLowerCase();
+
+let list=venues.filter(v=>{
+
+let typeMatch=v.type===event;
+
+if(event==="College"){
+typeMatch=v.type==="Cultural";
+}
+
+let districtMatch=v.district===district;
+
+let locationMatch=
+location==="" ||
+v.location.toLowerCase().includes(location);
+
+return typeMatch && districtMatch && locationMatch;
+
+});
+
+
+if(list.length===0){
+
+list=venues.filter(v=>{
+
+let typeMatch=v.type===event;
+
+if(event==="College"){
+typeMatch=v.type==="Cultural";
+}
+
+return typeMatch &&
+v.district===district;
+
+});
+
+}
+
+
+displayVenues(list);
+
+showPage("venues");
+
+}
+
+
+/* =========================================================
+   SAMPLE VENUES
+========================================================= */
+
+const venues=[
+
+{
+name:"Sri Krishna Mahal",
+district:"Chennai",
+location:"Chennai",
+type:"Wedding",
+rating:4.7,
+reviews:328,
+capacity:"1000 Guests",
+price:250000,
+image:"https://images.unsplash.com/photo-1519167758481-83f550bb49b3?auto=format&fit=crop&w=900&q=80",
+facilities:["AC Hall","Parking","Catering","Stage"]
+},
+
+{
+name:"Lakshmi Palace Mahal",
+district:"Chennai",
+location:"Tambaram",
+type:"Wedding",
+rating:4.5,
+reviews:241,
+capacity:"800 Guests",
+price:200000,
+image:"https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?auto=format&fit=crop&w=900&q=80",
+facilities:["AC","Parking","Kitchen"]
+},
+
+{
+name:"Sri Murugan Mahal",
+district:"Tiruvallur",
+location:"Avadi",
+type:"Wedding",
+rating:4.6,
+reviews:198,
+capacity:"900 Guests",
+price:180000,
+image:"https://images.unsplash.com/photo-1478146896981-b80fe463b330?auto=format&fit=crop&w=900&q=80",
+facilities:["AC Hall","Parking","Kitchen"]
+},
+
+{
+name:"Vijaya Mahal",
+district:"Tiruvallur",
+location:"Tiruvallur",
+type:"Wedding",
+rating:4.4,
+reviews:173,
+capacity:"700 Guests",
+price:160000,
+image:"https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=900&q=80",
+facilities:["Parking","Stage","Catering"]
+},
+
+{
+name:"Prathyusha Engineering College Auditorium",
+district:"Tiruvallur",
+location:"Tiruvallur",
+type:"Cultural",
+rating:4.6,
+reviews:145,
+capacity:"1200 Guests",
+price:100000,
+image:"https://images.unsplash.com/photo-1505373877841-8d25f7d46678?auto=format&fit=crop&w=900&q=80",
+facilities:["Stage","Sound System","Projector","Parking"]
+},
+
+{
+name:"Rajalakshmi Engineering College Auditorium",
+district:"Chengalpattu",
+location:"Chennai",
+type:"Cultural",
+rating:4.7,
+reviews:180,
+capacity:"1500 Guests",
+price:120000,
+image:"https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=900&q=80",
+facilities:["Stage","LED","Sound","Parking"]
+},
+
+{
+name:"Saveetha Engineering College Auditorium",
+district:"Chennai",
+location:"Chennai",
+type:"Cultural",
+rating:4.5,
+reviews:160,
+capacity:"1300 Guests",
+price:110000,
+image:"https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&w=900&q=80",
+facilities:["Stage","Sound","Projector"]
+},
+
+{
+name:"Sathyabama Institute of Science and Technology Auditorium",
+district:"Chennai",
+location:"Chennai",
+type:"Cultural",
+rating:4.8,
+reviews:220,
+capacity:"2000 Guests",
+price:150000,
+image:"https://images.unsplash.com/photo-1475721027785-f74eccf877e2?auto=format&fit=crop&w=900&q=80",
+facilities:["AC","Stage","LED","Sound"]
+},
+
+{
+name:"Vel Tech University Auditorium",
+district:"Tiruvallur",
+location:"Avadi",
+type:"Cultural",
+rating:4.7,
+reviews:190,
+capacity:"1800 Guests",
+price:135000,
+image:"https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?auto=format&fit=crop&w=900&q=80",
+facilities:["Stage","LED","Parking","Sound"]
+},
+
+{
+name:"SRM University Auditorium",
+district:"Chengalpattu",
+location:"Chengalpattu",
+type:"Cultural",
+rating:4.8,
+reviews:300,
+capacity:"2500 Guests",
+price:180000,
+image:"https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=900&q=80",
+facilities:["AC","LED","Sound","Parking"]
+},
+
+{
+name:"VIT University Auditorium",
+district:"Vellore",
+location:"Vellore",
+type:"Cultural",
+rating:4.8,
+reviews:280,
+capacity:"2200 Guests",
+price:160000,
+image:"https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?auto=format&fit=crop&w=900&q=80",
+facilities:["AC","Stage","LED","Sound"]
+},
+
+{
+name:"PSG College Auditorium",
+district:"Coimbatore",
+location:"Coimbatore",
+type:"Cultural",
+rating:4.7,
+reviews:205,
+capacity:"1800 Guests",
+price:145000,
+image:"https://images.unsplash.com/photo-1475721027785-f74eccf877e2?auto=format&fit=crop&w=900&q=80",
+facilities:["Stage","Sound","Parking"]
+},
+
+{
+name:"NIT Trichy Auditorium",
+district:"Trichy",
+location:"Trichy",
+type:"Cultural",
+rating:4.9,
+reviews:320,
+capacity:"2000 Guests",
+price:170000,
+image:"https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?auto=format&fit=crop&w=900&q=80",
+facilities:["AC","LED","Sound","Parking"]
+}
+
+];
+
+
+/* =========================================================
+   DISPLAY VENUES
+========================================================= */
+
+function displayVenues(list){
+
+let container=
+document.getElementById("venueList");
+
+
+if(list.length===0){
+
+container.innerHTML=`
+
+<div class="card"
+style="grid-column:1/-1;text-align:center">
+
+<h2>No venues found</h2>
+
+<p>
+Try another district.
+</p>
+
+</div>
+
+`;
+
+return;
+
+}
+
+
+container.innerHTML=list.map(v=>`
+
+<div class="venue-card">
+
+<img
+src="${v.image}"
+alt="${v.name}"
+>
+
+<div class="venue-content">
+
+<h3>${v.name}</h3>
+
+<div class="rating">
+★ ${v.rating}
+(${v.reviews} reviews)
+</div>
+
+<div class="venue-info">
+
+📍 ${v.location},
+${v.district}
+
+<br>
+
+👥 ${v.capacity}
+
+</div>
+
+<div class="facilities">
+
+${v.facilities.map(f=>
+`<span class="facility">${f}</span>`
+).join("")}
+
+</div>
+
+<div class="price">
+
+₹${v.price.toLocaleString("en-IN")}
+
+</div>
+
+<div class="venue-buttons">
+
+<button
+class="btn btn-dark"
+onclick='viewVenue(${JSON.stringify(v)})'
+>
+View
+</button>
+
+<button
+class="btn btn-primary"
+onclick='selectVenue(${JSON.stringify(v)})'
+>
+Select
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+`).join("");
+
+}
+
+
+/* =========================================================
+   VIEW VENUE
+========================================================= */
+
+function viewVenue(v){
+
+alert(
+
+"Venue: "+v.name+
+"\n\nLocation: "+v.location+
+"\n\nRating: "+v.rating+
+"\n\nReviews: "+v.reviews+
+"\n\nCapacity: "+v.capacity+
+"\n\nPrice: ₹"+v.price.toLocaleString("en-IN")+
+"\n\nFacilities: "+v.facilities.join(", ")
+
+);
+
+}
+
+
+/* =========================================================
+   SELECT VENUE
+========================================================= */
+
+function selectVenue(v){
+
+currentVenue=v;
+
+updatePlan();
+
+showPage("plan");
+
+}
+
+
+/* =========================================================
+   TOTAL
+========================================================= */
+
+function calculateTotal(){
+
+let venue=
+currentVenue ? currentVenue.price : 0;
+
+let catering=
+user.guests * user.cateringRate;
+
+let total=
+venue+
+catering+
+user.decoration+
+user.photography+
+user.dj+
+user.stage+
+user.led+
+user.security;
+
+return{
+
+venue,
+catering,
+total
+
+};
+
+}
+
+
+/* =========================================================
+   PLAN
+========================================================= */
+
+function updatePlan(){
+
+let c=calculateTotal();
+
+document.getElementById("planCustomer").textContent=
+user.name||"-";
+
+document.getElementById("planEvent").textContent=
+user.event||"-";
+
+document.getElementById("planDistrict").textContent=
+user.district||"-";
+
+document.getElementById("planDate").textContent=
+user.eventDate||"-";
+
+document.getElementById("planGuests").textContent=
+user.guests||"-";
+
+document.getElementById("planVenue").textContent=
+currentVenue ? currentVenue.name : "Not selected";
+
+document.getElementById("planVenuePrice").textContent=
+"₹"+c.venue.toLocaleString("en-IN");
+
+document.getElementById("planCatering").textContent=
+"₹"+c.catering.toLocaleString("en-IN");
+
+document.getElementById("planDecoration").textContent=
+"₹"+user.decoration.toLocaleString("en-IN");
+
+document.getElementById("planPhotography").textContent=
+"₹"+user.photography.toLocaleString("en-IN");
+
+document.getElementById("planDJ").textContent=
+"₹"+user.dj.toLocaleString("en-IN");
+
+document.getElementById("planStage").textContent=
+"₹"+user.stage.toLocaleString("en-IN");
+
+document.getElementById("planLED").textContent=
+"₹"+user.led.toLocaleString("en-IN");
+
+document.getElementById("planSecurity").textContent=
+"₹"+user.security.toLocaleString("en-IN");
+
+document.getElementById("planRequirements").textContent=
+user.requirements||"None";
+
+document.getElementById("planTotal").textContent=
+"₹"+c.total.toLocaleString("en-IN");
+
+}
+
+
+/* =========================================================
+   MODIFY
+========================================================= */
+
+function openModifyPlan(){
+
+if(!currentVenue){
+
+alert("Please select a venue first.");
+
+showPage("venues");
+
+return;
+
+}
+
+document.getElementById("modifyGuests").value=
+user.guests;
+
+document.getElementById("modifyFood").value=
+user.cateringRate;
+
+document.getElementById("modifyDecoration").value=
+user.decoration;
+
+document.getElementById("modifyPhotography").value=
+user.photography;
+
+document.getElementById("modifyDJ").value=
+user.dj;
+
+document.getElementById("modifyStage").value=
+user.stage;
+
+document.getElementById("modifyLED").value=
+user.led;
+
+document.getElementById("modifySecurity").value=
+user.security;
+
+document.getElementById("modifyRequirements").value=
+user.requirements;
+
+calculateModifiedPlan();
+
+showPage("modify");
+
+}
+
+
+function calculateModifiedPlan(){
+
+let guests=
+parseInt(document.getElementById("modifyGuests").value)||0;
+
+let food=
+Number(document.getElementById("modifyFood").value);
+
+let decoration=
+Number(document.getElementById("modifyDecoration").value);
+
+let photography=
+Number(document.getElementById("modifyPhotography").value);
+
+let dj=
+Number(document.getElementById("modifyDJ").value);
+
+let stage=
+Number(document.getElementById("modifyStage").value);
+
+let led=
+Number(document.getElementById("modifyLED").value);
+
+let security=
+Number(document.getElementById("modifySecurity").value);
+
+let catering=
+guests*food;
+
+let venue=
+currentVenue?currentVenue.price:0;
+
+let total=
+venue+
+catering+
+decoration+
+photography+
+dj+
+stage+
+led+
+security;
+
+document.getElementById("modifyVenue").textContent=
+"₹"+venue.toLocaleString("en-IN");
+
+document.getElementById("modifyCatering").textContent=
+"₹"+catering.toLocaleString("en-IN");
+
+document.getElementById("modifyDecorationPrice").textContent=
+"₹"+decoration.toLocaleString("en-IN");
+
+document.getElementById("modifyPhotographyPrice").textContent=
+"₹"+photography.toLocaleString("en-IN");
+
+document.getElementById("modifyDJPrice").textContent=
+"₹"+dj.toLocaleString("en-IN");
+
+document.getElementById("modifyStagePrice").textContent=
+"₹"+stage.toLocaleString("en-IN");
+
+document.getElementById("modifyLEDPrice").textContent=
+"₹"+led.toLocaleString("en-IN");
+
+document.getElementById("modifySecurityPrice").textContent=
+"₹"+security.toLocaleString("en-IN");
+
+document.getElementById("modifiedTotal").textContent=
+"₹"+total.toLocaleString("en-IN");
+
+}
+
+
+function saveModifiedPlan(){
+
+user.guests=
+parseInt(document.getElementById("modifyGuests").value)||1;
+
+user.cateringRate=
+Number(document.getElementById("modifyFood").value);
+
+user.decoration=
+Number(document.getElementById("modifyDecoration").value);
+
+user.photography=
+Number(document.getElementById("modifyPhotography").value);
+
+user.dj=
+Number(document.getElementById("modifyDJ").value);
+
+user.stage=
+Number(document.getElementById("modifyStage").value);
+
+user.led=
+Number(document.getElementById("modifyLED").value);
+
+user.security=
+Number(document.getElementById("modifySecurity").value);
+
+user.requirements=
+document.getElementById("modifyRequirements").value;
+
+updatePlan();
+
+alert(
+"Your plan has been updated successfully!"
+);
+
+showPage("plan");
+
+}
+
+
+/* =========================================================
+   BOOKING
+========================================================= */
+
+function acceptPlan(){
+
+if(!currentVenue){
+
+alert("Please select a venue first.");
+
+showPage("venues");
+
+return;
+
+}
+
+let c=calculateTotal();
+
+let id=
+"EV"+
+Math.floor(
+100000+
+Math.random()*900000
+);
+
+document.getElementById("bookingId").textContent=id;
+
+document.getElementById("bookingCustomer").textContent=
+user.name;
+
+document.getElementById("bookingEvent").textContent=
+user.event;
+
+document.getElementById("bookingDate").textContent=
+user.eventDate;
+
+document.getElementById("bookingVenue").textContent=
+currentVenue.name;
+
+document.getElementById("bookingGuests").textContent=
+user.guests;
+
+document.getElementById("bookingAmount").textContent=
+"₹"+c.total.toLocaleString("en-IN");
+
+document.getElementById("bookingPayment").textContent=
+"Pending";
+
+document.getElementById("bookingPayment").style.color=
+"#dc2626";
+
+alert(
+"Plan accepted! Please proceed to payment."
+);
+
+showPage("bookings");
+
+}
+
+
+/* =========================================================
+   PAYMENT
+========================================================= */
+
+function openPayment(){
+
+let c=calculateTotal();
+
+document.getElementById("paymentAmount").textContent=
+"₹"+c.total.toLocaleString("en-IN");
+
+showPage("payment");
+
+}
+
+
+function selectPaymentMethod(method){
+
+selectedPaymentMethod=method;
+
+document
+.querySelectorAll(".payment-method")
+.forEach(x=>x.classList.remove("selected"));
+
+document
+.getElementById("upiDetails")
+.classList.remove("active");
+
+document
+.getElementById("cardDetails")
+.classList.remove("active");
+
+document
+.getElementById("netDetails")
+.classList.remove("active");
+
+
+if(method==="UPI"){
+
+document
+.getElementById("upiMethod")
+.classList.add("selected");
+
+document
+.getElementById("upiDetails")
+.classList.add("active");
+
+}
+
+if(method==="Card"){
+
+document
+.getElementById("cardMethod")
+.classList.add("selected");
+
+document
+.getElementById("cardDetails")
+.classList.add("active");
+
+}
+
+if(method==="Net Banking"){
+
+document
+.getElementById("netMethod")
+.classList.add("selected");
+
+document
+.getElementById("netDetails")
+.classList.add("active");
+
+}
+
+}
+
+
+function makePayment(){
+
+if(!selectedPaymentMethod){
+
+alert("Please select a payment method.");
+
+return;
+
+}
+
+
+if(selectedPaymentMethod==="UPI"){
+
+if(!document.getElementById("upiId").value.trim()){
+
+alert("Please enter your UPI ID.");
+
+return;
+
+}
+
+}
+
+
+if(selectedPaymentMethod==="Card"){
+
+if(
+!document.getElementById("cardName").value.trim() ||
+!document.getElementById("cardNumber").value.trim() ||
+!document.getElementById("expiry").value.trim() ||
+!document.getElementById("cvv").value.trim()
+){
+
+alert("Please fill all card details.");
+
+return;
+
+}
+
+}
+
+
+if(selectedPaymentMethod==="Net Banking"){
+
+if(!document.getElementById("bank").value){
+
+alert("Please select your bank.");
+
+return;
+
+}
+
+}
+
+
+let c=calculateTotal();
+
+let transaction=
+"TXN"+Date.now();
+
+document.getElementById("transactionId").textContent=
+transaction;
+
+document.getElementById("successBookingId").textContent=
+document.getElementById("bookingId").textContent;
+
+document.getElementById("successAmount").textContent=
+"₹"+c.total.toLocaleString("en-IN");
+
+document.getElementById("successMethod").textContent=
+selectedPaymentMethod;
+
+document.getElementById("bookingPayment").textContent=
+"Paid";
+
+document.getElementById("bookingPayment").style.color=
+"#16a34a";
+
+alert("Payment successful!");
+
+showPage("paymentSuccess");
+
+}
+
+
+/* =========================================================
+   PROFILE
+========================================================= */
+
+function updateProfile(){
+
+document.getElementById("profileName").textContent=
+user.name||"-";
+
+document.getElementById("profileEmail").textContent=
+user.email||"-";
+
+document.getElementById("profileMobile").textContent=
+user.mobile||"-";
+
+document.getElementById("profileEvent").textContent=
+user.event||"-";
+
+document.getElementById("profileDistrict").textContent=
+user.district||"-";
+
+document.getElementById("profileLocation").textContent=
+user.location||"-";
+
+document.getElementById("profileReligion").textContent=
+user.religion||"-";
+
+document.getElementById("profileCaste").textContent=
+user.caste||"-";
+
+document.getElementById("profileCollege").textContent=
+user.college||"-";
+
+document.getElementById("profileGuests").textContent=
+user.guests||"-";
+
+}
+
+
+/* =========================================================
+   REVIEW
+========================================================= */
+
+function setRating(value){
+
+rating=value;
+
+document
+.querySelectorAll(".stars span")
+.forEach((star,index)=>{
+
+star.style.color=
+index<value
+?"#f59e0b"
+:"#d1d5db";
+
+});
+
+}
+
+
+function submitReview(){
+
+let text=
+document.getElementById("reviewText")
+.value
+.trim();
+
+if(rating===0){
+
+alert("Please select a rating.");
+
+return;
+
+}
+
+if(!text){
+
+alert("Please write a review.");
+
+return;
+
+}
+
+alert(
+"Thank you! Your review has been submitted."
+);
+
+document.getElementById("reviewText").value="";
+
+rating=0;
+
+setRating(0);
+
+}
+
+
+/* =========================================================
+   INITIAL
+========================================================= */
+
+updatePlan();
+
+</script>
+
+</body>
+</html>
